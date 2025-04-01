@@ -1,10 +1,7 @@
 {
-    "name": "B1TJam2025",
-    "rootNamespace": "B1TJam2025",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:f419e88c81e6c445294358476aac4aad"
-    ],
+    "name": "B1TJam2025.Utility",
+    "rootNamespace": "B1TJam2025.Utility",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
