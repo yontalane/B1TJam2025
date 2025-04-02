@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace B1TJam2025
+namespace B1TJam2025.MainMenu
 {
     /// <summary>
     /// Class used on the main menu to make a UI panel fade in and out

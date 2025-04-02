@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
-namespace B1TJam2025
+namespace B1TJam2025.MainMenu
 {
     /// <summary>
     /// Monobehavior used to make a text element flicker colors when moused over

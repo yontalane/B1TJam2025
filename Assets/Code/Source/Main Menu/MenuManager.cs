@@ -2,8 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-namespace B1TJam2025
+namespace B1TJam2025.MainMenu
 {
     /// <summary>
     /// Manager for main menu, mostly functions to attatch to buttons
@@ -38,13 +41,13 @@ namespace B1TJam2025
 
         private IEnumerator FadeTransition(float fadeDuration)
         {
-            if(__fade_out_panel == null || __fade_in_panel == null)
+            if (__fade_out_panel == null || __fade_in_panel == null)
             {
                 Debug.LogWarning("Both the Fade in and Fade Panel must be set before a fade transition can be ran (SetFadeOutPanel, SetFadeInPanel)");
             }
             else
             {
-                if(__fade_out_panel.TryGetComponent(out Image img)) { img.raycastTarget = true; } //disables clicking
+                if (__fade_out_panel.TryGetComponent(out Image img)) { img.raycastTarget = true; } //disables clicking
 
                 yield return __fade_out_panel.Fade(false, fadeDuration);
                 __fade_out_panel.transform.parent.gameObject.SetActive(false); //disables panel through parent
@@ -68,7 +71,7 @@ namespace B1TJam2025
         /// Moves the scenery away from the camera to get rid of lines at sharp normals
         /// </summary>
         /// <param name="scenery"> parent ofbject of main menu 3D objects </param>
-        public void FadeOutScenery(GameObject scenery) => StartCoroutine(YeetScenery(scenery)); 
+        public void FadeOutScenery(GameObject scenery) => StartCoroutine(YeetScenery(scenery));
 
         private IEnumerator YeetScenery(GameObject scenery)
         {
@@ -76,7 +79,7 @@ namespace B1TJam2025
             Camera cam = Camera.main;
             Vector3 direc = cam.transform.forward;
 
-            for(float t = 0; t < 0.45f; t += Time.deltaTime)
+            for (float t = 0; t < 0.45f; t += Time.deltaTime)
             {
                 scenery.transform.position += (10 * Time.deltaTime * direc);
             }
@@ -91,8 +94,15 @@ namespace B1TJam2025
         }
 
         /// <summary>
-        /// Quits the software
+        /// Quits the software. If in editor, exits Play Mode.
         /// </summary>
-        public void QuitSoftware() => Application.Quit();
+        public void QuitSoftware()
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
     }
 }

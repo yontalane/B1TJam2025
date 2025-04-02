@@ -1789,6 +1789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 147.286
       objectReference: {fileID: 0}
+    - target: {fileID: -4251207856811791120, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
       propertyPath: m_Name
       value: Cop
@@ -1800,6 +1804,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2135467277}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2135467278}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2135467279}
   m_SourcePrefab: {fileID: 100100000, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
 --- !u!1 &781727515
 GameObject:
@@ -4943,13 +4953,13 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5002,6 +5012,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2135467278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135467275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744f1b077de6c45ba9c1b39d062339cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2135467279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135467275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b256eafa2d44fc682707a3435ab0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_boredIntervalMin: 5
+  m_boredIntervalMax: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
