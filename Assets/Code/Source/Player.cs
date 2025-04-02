@@ -7,15 +7,15 @@ namespace B1TJam2025
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(PlayerInput))]
+    [RequireComponent(typeof(CharacterController))]
     [AddComponentMenu("B1TJam2025/Player")]
     public class Player : MonoBehaviour
     {
-        private const float WALK_DURATION = 0.75f;
         private const float SPEED_REDUCTION_WHEN_WALKING = 0.5f;
 
+        private CharacterController m_characterController;
         private Vector3 m_input;
         private bool m_isBusy;
-        private float m_startedWalkingTime;
         private Vector3 m_currentVelocity;
 
 
@@ -75,6 +75,8 @@ namespace B1TJam2025
 
         private void Start()
         {
+            m_characterController = GetComponent<CharacterController>();
+
             StartCoroutine(BoredTimer());
         }
 
@@ -83,28 +85,19 @@ namespace B1TJam2025
         {
             bool running = !m_isBusy && GetIsRunning();
 
-            float speed = m_speed;
-
-            if (running && !m_animator.GetBool("Run"))
-            {
-                m_startedWalkingTime = Time.time;
-                m_animator.SetInteger("Speed", 0);
-                speed *= SPEED_REDUCTION_WHEN_WALKING;
-            }
-            else if (Time.time - m_startedWalkingTime <= WALK_DURATION)
-            {
-                speed *= SPEED_REDUCTION_WHEN_WALKING;
-            }
-            else
-            {
-                m_animator.SetInteger("Speed", 1);
-            }
-
             m_animator.SetBool("Run", running);
 
             if (running)
             {
-                transform.Translate(speed * Time.deltaTime * m_input, Space.World);
+                float speed = m_speed;
+
+                if (m_animator.GetInteger("Speed") == 0)
+                {
+                    speed *= SPEED_REDUCTION_WHEN_WALKING;
+                }
+
+                //transform.Translate(speed * Time.deltaTime * m_input, Space.World);
+                m_characterController.Move(speed * Time.deltaTime * m_input);
 
                 Vector3 targetAngles = Quaternion.LookRotation(m_input.normalized, Vector3.up).eulerAngles;
                 transform.eulerAngles = new()
@@ -187,6 +180,11 @@ namespace B1TJam2025
 
             SetRandomVariation();
             m_animator.SetTrigger("Beat");
+        }
+
+        public void OnSprint(InputValue inputValue)
+        {
+            m_animator.SetInteger("Speed", inputValue.isPressed ? 1 : 0);
         }
     }
 }
