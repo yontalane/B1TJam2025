@@ -47,8 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+  m_rotationSpeed: 0.3
+  m_boredIntervalMin: 6
+  m_boredIntervalMax: 8
   m_animator: {fileID: 8167809874811387855}
   m_animBroadcaster: {fileID: 1935865867879502636}
+  m_club: {fileID: 3228365655202994611}
 --- !u!114 &8301347920591634810
 MonoBehaviour:
   m_ObjectHideFlags: 0

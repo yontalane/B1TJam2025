@@ -10,9 +10,6 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Player")]
     public class Player : MonoBehaviour
     {
-        private const float ROTATION_SPEED = 0.3f;
-        private const float BORED_INTERVAL = 6f;
-
         private Vector3 m_input;
         private bool m_isBusy;
 
@@ -23,6 +20,18 @@ namespace B1TJam2025
         [Min(0f)]
         private float m_speed;
 
+        [SerializeField]
+        [Min(0f)]
+        private float m_rotationSpeed;
+
+        [SerializeField]
+        [Min(0f)]
+        private float m_boredIntervalMin;
+
+        [SerializeField]
+        [Min(0f)]
+        private float m_boredIntervalMax;
+
         [Header("References")]
 
         [SerializeField]
@@ -31,13 +40,20 @@ namespace B1TJam2025
         [SerializeField]
         private AnimEventBroadcaster m_animBroadcaster;
 
+        [SerializeField]
+        private GameObject m_club;
+
 
         private void Reset()
         {
             m_speed = 5f;
+            m_rotationSpeed = 0.3f;
+            m_boredIntervalMin = 6f;
+            m_boredIntervalMax = 8f;
 
             m_animator = GetComponentInChildren<Animator>();
             m_animBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
+            m_club = null;
         }
 
 
@@ -67,7 +83,7 @@ namespace B1TJam2025
             if (running)
             {
                 transform.Translate(m_speed * Time.deltaTime * m_input, Space.World);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_input.normalized, Vector3.up), ROTATION_SPEED);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_input.normalized, Vector3.up), m_rotationSpeed);
             }
         }
 
@@ -76,7 +92,9 @@ namespace B1TJam2025
         {
             while (true)
             {
-                yield return new WaitForSeconds(BORED_INTERVAL);
+                float interval = Random.Range(m_boredIntervalMin, m_boredIntervalMax);
+
+                yield return new WaitForSeconds(interval);
 
                 if (m_isBusy)
                 {
@@ -88,6 +106,7 @@ namespace B1TJam2025
                     continue;
                 }
 
+                SetRandomVariation();
                 m_animator.SetTrigger("Bored");
             }
         }
@@ -98,12 +117,21 @@ namespace B1TJam2025
             return !Mathf.Approximately(m_input.magnitude, 0f);
         }
 
+        private void SetRandomVariation()
+        {
+            m_animator.SetInteger("Variation", Random.Range(0, 2));
+        }
+
         private void OnAnimEvent(AnimationEvent animationEvent)
         {
             switch (animationEvent.stringParameter)
             {
                 case "Busy":
                     m_isBusy = animationEvent.intParameter > 0;
+                    break;
+
+                case "Club":
+                    m_club.SetActive(animationEvent.intParameter > 0);
                     break;
             }
         }
@@ -128,6 +156,7 @@ namespace B1TJam2025
                 return;
             }
 
+            SetRandomVariation();
             m_animator.SetTrigger("Beat");
         }
     }
