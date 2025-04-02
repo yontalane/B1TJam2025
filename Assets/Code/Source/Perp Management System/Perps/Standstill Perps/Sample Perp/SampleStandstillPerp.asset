@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f1523499b8fe6418212f10f0cce3bc, type: 3}
+  m_Name: SampleStandstillPerp
+  m_EditorClassIdentifier: 
+  _perpPrefab: {fileID: 94867179793093517, guid: 065077aa9162c5d419a6fdeb7c1f293b, type: 3}
