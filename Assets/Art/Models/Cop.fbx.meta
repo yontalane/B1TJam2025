@@ -3,7 +3,37 @@ guid: 85b85126544df45b694adc46ea9ea256
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair
+    second: {fileID: 2100000, guid: 1a0a715cd911a466d868d54ce2d203dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 08d5260ce230548b196b990c6d8e163c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UniformBlackMatte
+    second: {fileID: 2100000, guid: f562f6a1e968a4a56acc212478e85c63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UniformBlackShiny
+    second: {fileID: 2100000, guid: b521e0d99473d4d6e8f1fdc3d0eacfe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UniformBlue
+    second: {fileID: 2100000, guid: 5ed67d3df36a548019a627a4ae2d1b03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UniformGold
+    second: {fileID: 2100000, guid: 610d37855d8714cc88583b490734c567, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

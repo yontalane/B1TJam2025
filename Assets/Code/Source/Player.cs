@@ -10,8 +10,13 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Player")]
     public class Player : MonoBehaviour
     {
+        private const float WALK_DURATION = 0.75f;
+        private const float SPEED_REDUCTION_WHEN_WALKING = 0.5f;
+
         private Vector3 m_input;
         private bool m_isBusy;
+        private float m_startedWalkingTime;
+        private Vector3 m_currentVelocity;
 
 
         [Header("Settings")]
@@ -78,12 +83,36 @@ namespace B1TJam2025
         {
             bool running = !m_isBusy && GetIsRunning();
 
+            float speed = m_speed;
+
+            if (running && !m_animator.GetBool("Run"))
+            {
+                m_startedWalkingTime = Time.time;
+                m_animator.SetInteger("Speed", 0);
+                speed *= SPEED_REDUCTION_WHEN_WALKING;
+            }
+            else if (Time.time - m_startedWalkingTime <= WALK_DURATION)
+            {
+                speed *= SPEED_REDUCTION_WHEN_WALKING;
+            }
+            else
+            {
+                m_animator.SetInteger("Speed", 1);
+            }
+
             m_animator.SetBool("Run", running);
 
             if (running)
             {
-                transform.Translate(m_speed * Time.deltaTime * m_input, Space.World);
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_input.normalized, Vector3.up), m_rotationSpeed);
+                transform.Translate(speed * Time.deltaTime * m_input, Space.World);
+
+                Vector3 targetAngles = Quaternion.LookRotation(m_input.normalized, Vector3.up).eulerAngles;
+                transform.eulerAngles = new()
+                {
+                    x = Mathf.SmoothDampAngle(transform.eulerAngles.x, targetAngles.x, ref m_currentVelocity.x, m_rotationSpeed),
+                    y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngles.y, ref m_currentVelocity.y, m_rotationSpeed),
+                    z = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngles.z, ref m_currentVelocity.z, m_rotationSpeed),
+                };
             }
         }
 
