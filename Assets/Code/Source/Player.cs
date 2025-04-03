@@ -17,6 +17,8 @@ namespace B1TJam2025
         private Vector3 m_input;
         private bool m_isBusy;
         private Vector3 m_currentVelocity;
+        private bool m_ridingVehicle;
+        private Vehicle m_vehicle;
 
 
         [Header("Settings")]
@@ -48,6 +50,9 @@ namespace B1TJam2025
         [SerializeField]
         private GameObject m_club;
 
+        [SerializeField]
+        private TriggerOverlapChecker m_interactionTrigger;
+
 
         private void Reset()
         {
@@ -59,6 +64,7 @@ namespace B1TJam2025
             m_animator = GetComponentInChildren<Animator>();
             m_animBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
             m_club = null;
+            m_interactionTrigger = GetComponentInChildren<TriggerOverlapChecker>();
         }
 
 
@@ -106,23 +112,44 @@ namespace B1TJam2025
         }
 
 
-        private void LateUpdate()
+        private void Update()
         {
-            bool running = !m_isBusy && GetIsRunning();
-
-            m_animator.SetBool("Run", running);
-
-            if (running)
+            if (GameManager.IsPaused)
             {
-                float speed = m_speed;
+                m_input = Vector3.zero;
+            }
 
+            if (!m_ridingVehicle)
+            {
+                UpdateMovementOnFoot();
+            }
+            else
+            {
+                UpdateMovementInVehicle();
+            }
+
+            transform.position = new()
+            {
+                x = transform.position.x,
+                y = 0f,
+                z = transform.position.z,
+            };
+        }
+
+        private void UpdateMovementOnFoot()
+        {
+            bool movementInputExists = !m_isBusy && GetMovementInputExists();
+
+            float speed = m_speed;
+
+            m_animator.SetBool("Run", movementInputExists);
+
+            if (movementInputExists)
+            {
                 if (m_animator.GetInteger("Speed") == 0)
                 {
                     speed *= SPEED_REDUCTION_WHEN_WALKING;
                 }
-
-                //transform.Translate(speed * Time.deltaTime * m_input, Space.World);
-                m_characterController.Move(speed * Time.deltaTime * m_input);
 
                 Vector3 targetAngles = Quaternion.LookRotation(m_input.normalized, Vector3.up).eulerAngles;
                 transform.eulerAngles = new()
@@ -131,7 +158,21 @@ namespace B1TJam2025
                     y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngles.y, ref m_currentVelocity.y, m_rotationSpeed),
                     z = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngles.z, ref m_currentVelocity.z, m_rotationSpeed),
                 };
+
+                m_characterController.Move(speed * Time.deltaTime * m_input);
             }
+        }
+
+        private void UpdateMovementInVehicle()
+        {
+            m_vehicle.Gear = Mathf.Approximately(m_input.z, 0f) ? 0 : m_input.z > 0f ? 1 : -1;
+
+            transform.eulerAngles += new Vector3()
+            {
+                y = Time.deltaTime * m_vehicle.RotationSpeed * 100f * m_input.x,
+            };
+
+            m_characterController.Move(Time.deltaTime * m_vehicle.CurrentSpeed * transform.forward);
         }
 
 
@@ -143,12 +184,17 @@ namespace B1TJam2025
 
                 yield return new WaitForSeconds(interval);
 
+                if (GameManager.IsPaused)
+                {
+                    continue;
+                }
+
                 if (m_isBusy)
                 {
                     continue;
                 }
 
-                if (GetIsRunning())
+                if (GetMovementInputExists())
                 {
                     continue;
                 }
@@ -159,7 +205,7 @@ namespace B1TJam2025
         }
 
 
-        private bool GetIsRunning()
+        private bool GetMovementInputExists()
         {
             return !Mathf.Approximately(m_input.magnitude, 0f);
         }
@@ -183,9 +229,61 @@ namespace B1TJam2025
             }
         }
 
+        private bool TryInteract()
+        {
+            if (m_interactionTrigger.TryGetOverlapByType(out Vehicle vehicle))
+            {
+                m_interactionTrigger.IsEnabled = false;
+
+                m_animator.SetBool("Ride", true);
+
+                vehicle.StartRiding(m_characterController);
+
+                m_ridingVehicle = true;
+                m_vehicle = vehicle;
+
+                return true;
+            }
+            else if (m_interactionTrigger.TryGetOverlapByType(out SubwayStop subwayStop))
+            {
+                SubwayManager.InteractWithSubwayStop(subwayStop);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool TryExitVehicle()
+        {
+            if (!m_ridingVehicle)
+            {
+                return false;
+            }
+
+            m_animator.SetBool("Ride", false);
+
+            m_vehicle.StopRiding();
+
+            transform.position = m_vehicle.OutsideSpot;
+
+            m_interactionTrigger.IsEnabled = true;
+            m_interactionTrigger.Clear();
+
+            m_ridingVehicle = false;
+            m_vehicle = null;
+
+            return true;
+        }
+
 
         public void OnMove(InputValue inputValue)
         {
+            if (GameManager.IsPaused)
+            {
+                return;
+            }
+
             Vector2 input = inputValue.Get<Vector2>();
 
             m_input = new()
@@ -198,7 +296,27 @@ namespace B1TJam2025
 
         public void OnAttack(InputValue inputValue)
         {
+            if (GameManager.IsPaused)
+            {
+                return;
+            }
+
             if (m_isBusy)
+            {
+                return;
+            }
+
+            if (!inputValue.isPressed)
+            {
+                return;
+            }
+
+            if (TryInteract())
+            {
+                return;
+            }
+
+            if (TryExitVehicle())
             {
                 return;
             }
@@ -209,6 +327,11 @@ namespace B1TJam2025
 
         public void OnSprint(InputValue inputValue)
         {
+            if (GameManager.IsPaused)
+            {
+                return;
+            }
+
             m_animator.SetInteger("Speed", inputValue.isPressed ? 1 : 0);
         }
     }
