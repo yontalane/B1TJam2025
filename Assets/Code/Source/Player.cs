@@ -77,6 +77,31 @@ namespace B1TJam2025
         {
             m_characterController = GetComponent<CharacterController>();
 
+            if (Camera.main.TryGetComponent(out SmoothFollow smoothFollow))
+            {
+                smoothFollow.transform.position = new()
+                {
+                    x = transform.position.x,
+                    y = smoothFollow.transform.position.y,
+                    z = transform.position.z - 2.5f,
+                };
+                smoothFollow.Initialize(transform);
+            }
+
+            transform.eulerAngles = new()
+            {
+                x = 0f,
+                y = 180f,
+                z = 0f,
+            };
+
+            transform.position = new()
+            {
+                x = transform.position.x,
+                y = 0f,
+                z = transform.position.z,
+            };
+
             StartCoroutine(BoredTimer());
         }
 

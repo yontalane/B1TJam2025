@@ -6,6 +6,7 @@ namespace B1TJam2025.Utility
     [AddComponentMenu("B1TJam2025/Utility/Smooth Follow")]
     public class SmoothFollow : MonoBehaviour
     {
+        private bool m_initialized = false;
         private Vector3 m_offset;
         private Vector3 m_currentVelocity;
 
@@ -31,11 +32,29 @@ namespace B1TJam2025.Utility
 
         private void Start()
         {
+            Initialize(m_target);
+        }
+
+        public void Initialize(Transform target)
+        {
+            if (target == null)
+            {
+                return;
+            }
+
+            m_target = target;
             m_offset = transform.position - m_target.position;
+
+            m_initialized = true;
         }
 
         private void Update()
         {
+            if (!m_initialized)
+            {
+                return;
+            }
+
             Vector3 desiredPosition = m_target.position + m_offset;
             transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref m_currentVelocity, m_smoothTime);
         }
