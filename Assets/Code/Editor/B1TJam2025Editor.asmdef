@@ -1,0 +1,16 @@
+{
+    "name": "B1TJam2025Editor",
+    "rootNamespace": "B1TJam2025Editor",
+    "references": [
+        "GUID:2e1c888df753e4af9a39d4145754952a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
