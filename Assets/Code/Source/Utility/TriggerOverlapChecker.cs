@@ -12,6 +12,8 @@ namespace B1TJam2025.Utility
         private readonly List<Collider> m_colliders = new();
 
 
+        public Collider Collider { get; private set; }
+
         public bool IsEnabled
         {
             get
@@ -34,7 +36,9 @@ namespace B1TJam2025.Utility
 
         private void Start()
         {
-            GetComponent<Collider>().isTrigger = true;
+            Collider = GetComponent<Collider>();
+
+            Collider.isTrigger = true;
         }
 
         public void Clear() => m_colliders.Clear();

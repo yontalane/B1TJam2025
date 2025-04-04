@@ -6,6 +6,8 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Game Manager")]
     public sealed class GameManager : MonoBehaviour
     {
+        [Header("Prefabs")]
+
         [SerializeField]
         private Player m_playerPrefab;
 

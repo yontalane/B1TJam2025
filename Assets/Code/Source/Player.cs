@@ -48,10 +48,15 @@ namespace B1TJam2025
         private AnimEventBroadcaster m_animBroadcaster;
 
         [SerializeField]
-        private GameObject m_club;
+        private TriggerOverlapChecker m_club;
 
         [SerializeField]
         private TriggerOverlapChecker m_interactionTrigger;
+
+        [Header("Prefabs")]
+
+        [SerializeField]
+        private ParticleSystem m_hitEffect;
 
 
         private void Reset()
@@ -63,8 +68,10 @@ namespace B1TJam2025
 
             m_animator = GetComponentInChildren<Animator>();
             m_animBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
-            m_club = null;
+            m_club = GetComponentInChildren<TriggerOverlapChecker>();
             m_interactionTrigger = GetComponentInChildren<TriggerOverlapChecker>();
+
+            m_hitEffect = null;
         }
 
 
@@ -205,6 +212,12 @@ namespace B1TJam2025
         }
 
 
+        public void MoveTo(Transform target)
+        {
+            m_characterController.Move(target.position - transform.position);
+            transform.eulerAngles = target.eulerAngles;
+        }
+
         private bool GetMovementInputExists()
         {
             return !Mathf.Approximately(m_input.magnitude, 0f);
@@ -224,7 +237,19 @@ namespace B1TJam2025
                     break;
 
                 case "Club":
-                    m_club.SetActive(animationEvent.intParameter > 0);
+                    m_club.IsEnabled = animationEvent.intParameter > 0;
+                    m_club.gameObject.SetActive(m_club.IsEnabled);
+                    break;
+
+                case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO:
+                    perp.GetHit();
+
+                    ParticleSystem effect = Instantiate(m_hitEffect);
+                    effect.transform.position = m_club.Collider.bounds.center;
+                    effect.transform.localEulerAngles = Vector3.zero;
+                    effect.transform.localScale = Vector3.one;
+
+                    Camera.main.GetComponent<Shake>().Activate();
                     break;
             }
         }
