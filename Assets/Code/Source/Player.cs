@@ -15,7 +15,8 @@ namespace B1TJam2025
 
         private CharacterController m_characterController;
         private Vector3 m_input;
-        private bool m_isBusy;
+        private bool m_canRun = true;
+        private bool m_canBeat = true;
         private Vector3 m_currentVelocity;
         private bool m_ridingVehicle;
         private Vehicle m_vehicle;
@@ -146,7 +147,7 @@ namespace B1TJam2025
 
         private void UpdateMovementOnFoot()
         {
-            bool movementInputExists = !m_isBusy && GetMovementInputExists();
+            bool movementInputExists = m_canRun && GetMovementInputExists();
 
             float speed = m_speed;
 
@@ -201,7 +202,7 @@ namespace B1TJam2025
                     continue;
                 }
 
-                if (m_isBusy)
+                if (!m_canRun || !m_canBeat)
                 {
                     continue;
                 }
@@ -237,8 +238,12 @@ namespace B1TJam2025
         {
             switch (animationEvent.stringParameter)
             {
-                case "Busy":
-                    m_isBusy = animationEvent.intParameter > 0;
+                case "CanRun":
+                    m_canRun = animationEvent.intParameter > 0;
+                    break;
+
+                case "CanBeat":
+                    m_canBeat = animationEvent.intParameter > 0;
                     break;
 
                 case "Club":
@@ -331,7 +336,7 @@ namespace B1TJam2025
                 return;
             }
 
-            if (m_isBusy)
+            if (!m_canBeat)
             {
                 return;
             }

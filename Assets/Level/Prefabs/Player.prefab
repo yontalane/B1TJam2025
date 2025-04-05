@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0717c9d5db748ad9e664eb6f52fd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 2.5
+  m_speed: 3
   m_rotationSpeed: 0.1
   m_boredIntervalMin: 6
   m_boredIntervalMax: 8
@@ -10972,7 +10972,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554679403626490522}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 85b85126544df45b694adc46ea9ea256, type: 3}
   m_Controller: {fileID: 9100000, guid: 9e70f8b3468dd426c86e76e9d713685d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
