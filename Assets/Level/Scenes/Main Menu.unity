@@ -378,24 +378,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 252956574}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -853,24 +853,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0.4
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1293756521}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1104,24 +1104,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1293756521}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0.4
           m_StringArgument: 
@@ -3087,24 +3087,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 734862477}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3448,24 +3448,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 145247864}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3605,24 +3605,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0.4
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 252956574}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4524,24 +4524,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1743370041}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0.4
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 282827551}
-        m_TargetAssemblyTypeName: B1TJam2025.MenuManager, B1TJam2025
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeOutPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 145247864}
-          m_ObjectArgumentAssemblyTypeName: B1TJam2025.FadePanel, B1TJam2025
+          m_ObjectArgumentAssemblyTypeName: B1TJam2025.MainMenu.FadePanel, B1TJam2025.MainMenu
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
