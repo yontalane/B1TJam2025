@@ -8,13 +8,25 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Game Manager")]
     public sealed class GameManager : MonoBehaviour
     {
+        public delegate void GameHandler();
+        public static GameHandler OnGameStart = null;
+
+
         private const string PERP_FLEE_TARGET_TAG = "PerpFleeTarget";
 
 
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
         private readonly List<GameObject> m_tempFleeTargets = new();
+        private bool m_inRandomSegment;
+        private int m_sequenceIndex;
+        private int m_perpsToBeat;
 
+
+        [Header("Script")]
+
+        [SerializeField]
+        private GameSequence m_sequence;
 
         [Header("Prefabs")]
 
@@ -29,6 +41,12 @@ namespace B1TJam2025
 
         public static Player Player { get; private set; }
 
+        public static CityMap CityMap { get; private set; }
+
+        public static int TotalBeats { get; private set; } = 0;
+
+        public static int TotalEscapes { get; private set; } = 0;
+
 
         private void Reset()
         {
@@ -41,12 +59,14 @@ namespace B1TJam2025
         {
             Perp.OnPerpEscape += OnPerpEscape;
             Perp.OnPerpKO += OnPerpKO;
+            PerpSpawnLocationManager.OnSpawnPerp += OnSpawnPerp;
         }
 
         private void OnDisable()
         {
             Perp.OnPerpEscape -= OnPerpEscape;
             Perp.OnPerpKO -= OnPerpKO;
+            PerpSpawnLocationManager.OnSpawnPerp -= OnSpawnPerp;
         }
 
 
@@ -77,19 +97,17 @@ namespace B1TJam2025
             }
 
             Player = FindAnyObjectByType<Player>();
+            CityMap = FindAnyObjectByType<CityMap>();
 
             m_fleeTargets.AddRange(GameObject.FindGameObjectsWithTag(PERP_FLEE_TARGET_TAG));
 
             NavMeshSurface navMeshSurface = FindAnyObjectByType<NavMeshSurface>();
             navMeshSurface.BuildNavMesh();
 
-            Perp[] perps = FindObjectsByType<Perp>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            foreach (Perp perp in perps)
-            {
-                perp.EnableNavMeshAgent();
-            }
+            OnGameStart?.Invoke();
 
-            SpawnPerp();
+            m_sequenceIndex = -1;
+            AdvanceSequence();
         }
 
 
@@ -118,22 +136,127 @@ namespace B1TJam2025
         }
 
 
-        private void SpawnPerp()
+        private void SpawnRandomPerp()
         {
             PerpSpawnLocationManager.SpawnNextPerp();
-            Debug.Log($"New perp spawned.");
+            Debug.Log($"Random perp spawned.");
         }
 
-        private void OnPerpEscape()
+        private void OnSpawnPerp(GameObject perpObj)
         {
+            if (!perpObj.TryGetComponent(out Perp perp))
+            {
+                return;
+            }
+
+            perp.IsRandom = true;
+        }
+
+        private void OnPerpEscape(Perp perp)
+        {
+            TotalEscapes++;
             Debug.Log($"Perp escaped.");
-            SpawnPerp();
+
+            if (!perp.IsRandom)
+            {
+                m_perpsToBeat--;
+            }
+
+            if (TotalEscapes >= m_sequence.escapeCountToLose)
+            {
+                Debug.Log($"<b>YOU LOSE</b>");
+                return;
+            }
+
+            if (m_inRandomSegment && m_perpsToBeat > 0)
+            {
+                SpawnRandomPerp();
+            }
         }
 
-        private void OnPerpKO()
+        private void OnPerpKO(Perp _)
         {
+            TotalBeats++;
+            m_perpsToBeat--;
             Debug.Log($"Perp defeated.");
-            SpawnPerp();
+
+            if (m_inRandomSegment && m_perpsToBeat > 0)
+            {
+                SpawnRandomPerp();
+            }
+        }
+
+
+        private void AdvanceSequence()
+        {
+            m_sequenceIndex++;
+
+            Debug.Log($"Advanced to segment number {m_sequenceIndex + 1} of {m_sequence.segments.Length}.");
+
+            if (m_sequenceIndex >= m_sequence.segments.Length)
+            {
+                return;
+            }
+
+            GameSequenceSegment segment = m_sequence.segments[m_sequenceIndex];
+
+            if (segment.type == GameSequenceSegmentType.Scripted)
+            {
+                m_inRandomSegment = false;
+                InitializeScriptedSegment(segment);
+            }
+            else
+            {
+                m_inRandomSegment = true;
+                m_perpsToBeat += segment.randomCount;
+                SpawnRandomPerp();
+            }
+        }
+
+        private void InitializeScriptedSegment(GameSequenceSegment segment)
+        {
+            GameObject spawnTarget = GameObject.Find(segment.spawnTarget);
+
+            if (spawnTarget == null || segment.perp == null)
+            {
+                Debug.LogError($"GameSequenceSegment is not set up properly.");
+                return;
+            }
+
+            GameObject instance = segment.perp.SpawnPerp();
+            instance.transform.position = spawnTarget.transform.position;
+            instance.transform.eulerAngles = spawnTarget.transform.eulerAngles;
+            instance.transform.localScale = Vector3.one;
+
+            if (instance.TryGetComponent(out Perp perp))
+            {
+                perp.IsRandom = false;
+            }
+
+            m_perpsToBeat++;
+
+            Debug.Log($"Scripted perp spawned.");
+
+            if (!segment.beatBeforeContinuing)
+            {
+                AdvanceSequence();
+            }
+        }
+
+
+        private void LateUpdate()
+        {
+            if (m_perpsToBeat <= 0)
+            {
+                if (m_sequenceIndex < m_sequence.segments.Length)
+                {
+                    AdvanceSequence();
+                }
+                else
+                {
+                    Debug.Log($"<b>YOU WIN</b>");
+                }
+            }
         }
     }
 }

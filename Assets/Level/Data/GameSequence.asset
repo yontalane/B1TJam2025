@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22f1f610ece6410ca5331db78f930d5, type: 3}
+  m_Name: GameSequence
+  m_EditorClassIdentifier: 
+  escapeCountToLose: 2
+  segments:
+  - type: 0
+    spawnTarget: Scripted Perp A
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 0
+    randomCount: 3
+  - type: 0
+    spawnTarget: Scripted Perp B
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 1
+    randomCount: 3
+  - type: 0
+    spawnTarget: Scripted Perp C
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 1
+    randomCount: 3
+  - type: 1
+    spawnTarget: Scripted Perp C
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 1
+    randomCount: 2
+  - type: 0
+    spawnTarget: Scripted Perp A
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 1
+    randomCount: 2

@@ -19,6 +19,7 @@ namespace B1TJam2025
         private Vector3 m_currentVelocity;
         private bool m_ridingVehicle;
         private Vehicle m_vehicle;
+        private bool m_cheatSprint;
 
 
         [Header("Settings")]
@@ -153,7 +154,11 @@ namespace B1TJam2025
 
             if (movementInputExists)
             {
-                if (m_animator.GetInteger("Speed") == 0)
+                if (m_cheatSprint)
+                {
+                    speed *= 5;
+                }
+                else if (m_animator.GetInteger("Speed") == 0)
                 {
                     speed *= SPEED_REDUCTION_WHEN_WALKING;
                 }
@@ -358,6 +363,11 @@ namespace B1TJam2025
             }
 
             m_animator.SetInteger("Speed", inputValue.isPressed ? 1 : 0);
+        }
+
+        public void OnCheatSprint(InputValue inputValue)
+        {
+            m_cheatSprint = inputValue.isPressed;
         }
     }
 }

@@ -12489,6 +12489,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_component: {fileID: 235127281898001884}
+--- !u!1 &750159412952602496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2891668836220829731}
+  - component: {fileID: 2159819942120186979}
+  m_Layer: 0
+  m_Name: Scripted Perp A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &2891668836220829731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750159412952602496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.19, y: 0, z: -9.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4160742375683357133}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2159819942120186979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750159412952602496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd971d5cda4d19aef6386f2de2730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_name: 
+  m_type: 0
+--- !u!1 &1738573323397809058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6057346449417130516}
+  - component: {fileID: 4323227620596642195}
+  m_Layer: 0
+  m_Name: Scripted Perp C
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &6057346449417130516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738573323397809058}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.35374075, z: -0, w: 0.93534356}
+  m_LocalPosition: {x: -1.27, y: 0, z: -8.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4160742375683357133}
+  m_LocalEulerAnglesHint: {x: 0, y: 41.433, z: 0}
+--- !u!114 &4323227620596642195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738573323397809058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd971d5cda4d19aef6386f2de2730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_name: 
+  m_type: 0
 --- !u!1 &2238039727268646158
 GameObject:
   m_ObjectHideFlags: 0
@@ -20379,6 +20471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51478203274491185}
   - component: {fileID: 6622229711820249117}
+  - component: {fileID: 7848853275471440009}
   m_Layer: 0
   m_Name: City
   m_TagString: Untagged
@@ -20415,7 +20508,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e398773b99d4fb5b622d8800f0feae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_perpSpawner: {fileID: 6498385939559201960}
+--- !u!65 &7848853275471440009
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5468012281117300037}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 72, y: 1, z: 109}
+  m_Center: {x: -18, y: 0, z: -26}
+--- !u!1 &6360857780531507560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3195911463876810512}
+  - component: {fileID: 6567992674872954871}
+  m_Layer: 0
+  m_Name: Scripted Perp B
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3195911463876810512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360857780531507560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.24, y: 0, z: -9.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4160742375683357133}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6567992674872954871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360857780531507560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd971d5cda4d19aef6386f2de2730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_name: 
+  m_type: 0
 --- !u!1 &6725743179985421419
 GameObject:
   m_ObjectHideFlags: 0
@@ -20452,6 +20611,9 @@ Transform:
   - {fileID: 5177648244359804096}
   - {fileID: 6135534998981636654}
   - {fileID: 6208245598506633553}
+  - {fileID: 2891668836220829731}
+  - {fileID: 3195911463876810512}
+  - {fileID: 6057346449417130516}
   m_Father: {fileID: 8412819052909315471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &46680865298096476
@@ -20767,6 +20929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e454cffea447a4ebbd6b8fb09d129b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attractMode: 0
   _perpSpawns:
   - Position: {x: -30.453224, y: 0, z: 1.0593486}
     Rotation: {x: 0, y: -0.8834664, z: 0, w: 0.46849442}

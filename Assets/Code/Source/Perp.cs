@@ -42,7 +42,8 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Perp")]
     public class Perp : MonoBehaviour
     {
-        public delegate void PerpEventHandler();
+        public delegate void PerpEventHandler(Perp perp);
+        public static PerpEventHandler OnPerpSpawn = null;
         public static PerpEventHandler OnPerpKO = null;
         public static PerpEventHandler OnPerpEscape = null;
 
@@ -82,6 +83,8 @@ namespace B1TJam2025
         [SerializeField]
         private ParticleSystem m_koEffect;
 
+
+        public bool IsRandom { get; set; }
 
         public PerpState State
         {
@@ -161,6 +164,8 @@ namespace B1TJam2025
             m_navMeshAgent = GetComponent<NavMeshAgent>();
 
             m_alert.gameObject.SetActive(false);
+
+            OnPerpSpawn?.Invoke(this);
         }
 
         public void Initialize(PerpSettings settings)
@@ -214,7 +219,7 @@ namespace B1TJam2025
 
             if (State == PerpState.Run && Mathf.Approximately(Vector3.Distance(transform.position, m_navMeshAgent.destination), 0f))
             {
-                OnPerpEscape?.Invoke();
+                OnPerpEscape?.Invoke(this);
                 Destroy(gameObject);
             }
         }
@@ -227,6 +232,7 @@ namespace B1TJam2025
             if (m_settings.hp > 0)
             {
                 State = PerpState.Cower;
+                m_navMeshAgent.isStopped = true;
                 m_animator.SetInteger("Variance", Random.Range(0, 2));
                 m_animator.SetTrigger("Hit");
             }
@@ -235,7 +241,7 @@ namespace B1TJam2025
                 transform.position += 0.1f * Vector3.up;
                 State = PerpState.KO;
                 m_animator.SetTrigger("KO");
-                OnPerpKO?.Invoke();
+                OnPerpKO?.Invoke(this);
                 StartCoroutine(RunDeathSequence());
             }
         }
@@ -271,10 +277,16 @@ namespace B1TJam2025
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, m_settings.alertRadius);
 
+            if (Application.isPlaying)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(transform.position, 3f);
+            }
+
             if (Application.isPlaying && m_navMeshAgent.hasPath)
             {
                 Gizmos.color = Color.magenta;
-                Gizmos.DrawSphere(m_navMeshAgent.destination, 1f);
+                Gizmos.DrawSphere(m_navMeshAgent.destination, 3f);
             }
         }
     }

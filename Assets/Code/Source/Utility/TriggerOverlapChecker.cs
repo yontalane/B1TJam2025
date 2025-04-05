@@ -65,9 +65,15 @@ namespace B1TJam2025.Utility
 
         public bool TryGetOverlapByType<T>(out T overlap) where T : Component
         {
-            foreach (Collider collider in m_colliders)
+            for (int i = m_colliders.Count - 1; i >= 0; i--)
             {
-                if (collider.TryGetComponent(out overlap))
+                if (m_colliders[i] == null)
+                {
+                    m_colliders.RemoveAt(i);
+                    continue;
+                }
+
+                if (m_colliders[i].TryGetComponent(out overlap))
                 {
                     return true;
                 }
