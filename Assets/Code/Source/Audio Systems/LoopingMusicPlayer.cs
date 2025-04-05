@@ -58,13 +58,11 @@ namespace B1TJam2025
             _musicSource.resource = _songIntro;
             _musicSource.time = 0;
             _musicSource.loop = false;
-            _musicSource.volume = 0.8f;
             _musicSource.Play();
         }
 
         private void SetToLoop()
         {
-            Debug.Log("Loop Start");
             _musicSource.resource = _songMain;
             _musicSource.time = 0;
             _musicSource.loop = true;
