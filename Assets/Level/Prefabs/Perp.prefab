@@ -143,7 +143,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9056233791331413783}
   - component: {fileID: 2472193268741294207}
-  - component: {fileID: 5991206777024069125}
+  - component: {fileID: 3628690854954574782}
+  - component: {fileID: 212132897448373146}
   m_Layer: 0
   m_Name: Perp
   m_TagString: Untagged
@@ -181,18 +182,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64122cf551f294dd48f6cfaea868e7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_behavior: 10
-  m_hp: 3
-  m_alertRadius: 2.25
-  m_alertTimeBeforeAction: 4
+  m_body: {fileID: 1937449211196866386}
   m_animator: {fileID: 1232957143755647128}
   m_canvas: {fileID: 6134437931991013998}
   m_alert: {fileID: 8432412004946731163}
   m_dialogLocation: {fileID: 3443241330421251786}
   m_dialogCamera: {fileID: 2607886323893278199}
   m_koEffect: {fileID: 1624796377578922409, guid: b055b125e1049454faff7614c55ac1a2, type: 3}
---- !u!143 &5991206777024069125
-CharacterController:
+--- !u!195 &3628690854954574782
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424540667960206055}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.25
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &212132897448373146
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,15 +226,13 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1
+  serializedVersion: 2
   m_Radius: 0.25
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5869643036658014752
 GameObject:
@@ -534,6 +552,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4769438479186624232}
   m_SourcePrefab: {fileID: 100100000, guid: 9ffddb591b86144cba44fcc50809365f, type: 3}
+--- !u!137 &1937449211196866386 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5086433786596988391, guid: 9ffddb591b86144cba44fcc50809365f, type: 3}
+  m_PrefabInstance: {fileID: 6662397656097581749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5815552910722488292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9ffddb591b86144cba44fcc50809365f, type: 3}

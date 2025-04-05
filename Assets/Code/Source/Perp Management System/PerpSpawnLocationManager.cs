@@ -28,6 +28,9 @@ namespace B1TJam2025
 
         [Header("Settings")]
 
+        [SerializeField]
+        private bool _attractMode;
+
         [SerializeField] 
         private List<PerpSpawnPoint> _perpSpawns;
 
@@ -40,8 +43,8 @@ namespace B1TJam2025
             //singleton pattern
             if (__instance != null) Destroy(this);
             else __instance = this;
-            
-            SpawnRandom(_perps); //starts the demo spawn chain
+
+            if (_attractMode) SpawnRandom(_perps); //starts the demo spawn chain
         }
 
         private void OnEnable() => __spawnNextPerp += () => SpawnRandom(_perps);

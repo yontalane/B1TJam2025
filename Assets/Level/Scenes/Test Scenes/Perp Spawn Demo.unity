@@ -845,6 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e454cffea447a4ebbd6b8fb09d129b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attractMode: 1
   _perpSpawns:
   - Position: {x: -8.650887, y: 0, z: 10.042717}
     Rotation: {x: 0, y: -0.9125289, z: 0, w: -0.40901226}

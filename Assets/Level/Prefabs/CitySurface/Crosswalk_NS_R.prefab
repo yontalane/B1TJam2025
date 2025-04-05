@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5301450730129348097}
   m_Layer: 0
   m_Name: Crosswalk_NS_R
-  m_TagString: Untagged
+  m_TagString: PerpFleeTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,10 +131,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -2416183225027720192, guid: 93e505dcfb95d4856a255dd32d3f0a37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4975886805976789248}
   m_SourcePrefab: {fileID: 100100000, guid: 93e505dcfb95d4856a255dd32d3f0a37, type: 3}
 --- !u!4 &2346207003716618040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93e505dcfb95d4856a255dd32d3f0a37, type: 3}
   m_PrefabInstance: {fileID: 2811899470792188115}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8751093873186073811 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2416183225027720192, guid: 93e505dcfb95d4856a255dd32d3f0a37, type: 3}
+  m_PrefabInstance: {fileID: 2811899470792188115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4975886805976789248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751093873186073811}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020000001, y: 0.019999998, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.5}

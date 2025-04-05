@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace B1TJam2025
 {
@@ -20,38 +22,45 @@ namespace B1TJam2025
         KO = 50,
     }
 
+    [System.Serializable]
+    public struct PerpSettings
+    {
+        public PerpBehavior behavior;
+
+        [Range(1, 5)]
+        public int hp;
+
+        [Min(0f)]
+        public float alertRadius;
+
+        [Min(0f)]
+        public float alertTimeBeforeAction;
+    }
+
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(NavMeshAgent))]
     [AddComponentMenu("B1TJam2025/Perp")]
     public class Perp : MonoBehaviour
     {
+        public delegate void PerpEventHandler();
+        public static PerpEventHandler OnPerpKO = null;
+        public static PerpEventHandler OnPerpEscape = null;
+
+
         private const float PERCENT_OF_RADIUS_BEFORE_ACTION = 0.5f;
 
 
-        private CharacterController m_characterController;
+        private PerpSettings m_settings;
+        private NavMeshAgent m_navMeshAgent;
         private bool m_playerWasInAlertZone;
         private PerpState m_state;
         private float m_alertStartTime;
 
 
-        [Header("Settings")]
-
-        [SerializeField]
-        private PerpBehavior m_behavior;
-
-        [SerializeField]
-        [Range(1, 5)]
-        private int m_hp;
-
-        [SerializeField]
-        [Min(0f)]
-        private float m_alertRadius;
-
-        [SerializeField]
-        [Min(0f)]
-        private float m_alertTimeBeforeAction;
-
         [Header("References")]
+
+        [SerializeField]
+        private Renderer m_body;
 
         [SerializeField]
         private Animator m_animator;
@@ -117,11 +126,11 @@ namespace B1TJam2025
                         break;
 
                     case PerpState.Run:
-                        m_animator.SetBool("Run", true);
+                        StartRunning();
                         break;
 
                     case PerpState.KO:
-                        m_characterController.enabled = false;
+                        m_navMeshAgent.enabled = false;
 
                         ParticleSystem effect = Instantiate(m_koEffect);
                         effect.transform.position = transform.position;
@@ -137,11 +146,7 @@ namespace B1TJam2025
 
         private void Reset()
         {
-            m_behavior = PerpBehavior.Dialog;
-            m_hp = 3;
-            m_alertRadius = 2.25f;
-            m_alertTimeBeforeAction = 4f;
-
+            m_body = GetComponentInChildren<Renderer>();
             m_animator = GetComponentInChildren<Animator>();
             m_canvas = GetComponentInChildren<Canvas>();
             m_alert = GetComponentInChildren<TMP_Text>();
@@ -153,25 +158,35 @@ namespace B1TJam2025
 
         private void Start()
         {
-            m_characterController = GetComponent<CharacterController>();
+            m_navMeshAgent = GetComponent<NavMeshAgent>();
 
             m_alert.gameObject.SetActive(false);
+        }
+
+        public void Initialize(PerpSettings settings)
+        {
+            m_settings = settings;
+        }
+
+        public void EnableNavMeshAgent()
+        {
+            GetComponent<NavMeshAgent>().enabled = true;
         }
 
 
         private void LateUpdate()
         {
             float distanceToPlayer = Vector3.Distance(transform.position, GameManager.Player.transform.position);
-            bool playerIsInAlertZone = distanceToPlayer < m_alertRadius;
+            bool playerIsInAlertZone = distanceToPlayer < m_settings.alertRadius;
             bool playerJustEnteredAlertZone = !m_playerWasInAlertZone && playerIsInAlertZone;
-            bool playerIsTooClose = distanceToPlayer < m_alertRadius * PERCENT_OF_RADIUS_BEFORE_ACTION;
-            bool perpHasBeenAlertForTooLong = State == PerpState.Alert && Time.time - m_alertStartTime > m_alertTimeBeforeAction;
+            bool playerIsTooClose = distanceToPlayer < m_settings.alertRadius * PERCENT_OF_RADIUS_BEFORE_ACTION;
+            bool perpHasBeenAlertForTooLong = State == PerpState.Alert && Time.time - m_alertStartTime > m_settings.alertTimeBeforeAction;
 
             if (State == PerpState.Idle || State == PerpState.Alert)
             {
                 if (playerIsTooClose || (perpHasBeenAlertForTooLong && playerIsInAlertZone))
                 {
-                    State = m_behavior == PerpBehavior.Dialog ? PerpState.Dialog : m_behavior == PerpBehavior.Run ? PerpState.Run : PerpState.Cower;
+                    State = m_settings.behavior == PerpBehavior.Dialog ? PerpState.Dialog : m_settings.behavior == PerpBehavior.Run ? PerpState.Run : PerpState.Cower;
                 }
                 else if (perpHasBeenAlertForTooLong && !playerIsInAlertZone)
                 {
@@ -196,14 +211,20 @@ namespace B1TJam2025
             }
 
             m_playerWasInAlertZone = playerIsInAlertZone;
+
+            if (State == PerpState.Run && Mathf.Approximately(Vector3.Distance(transform.position, m_navMeshAgent.destination), 0f))
+            {
+                OnPerpEscape?.Invoke();
+                Destroy(gameObject);
+            }
         }
 
 
         public void GetHit()
         {
-            m_hp--;
+            m_settings.hp--;
 
-            if (m_hp > 0)
+            if (m_settings.hp > 0)
             {
                 State = PerpState.Cower;
                 m_animator.SetInteger("Variance", Random.Range(0, 2));
@@ -214,14 +235,47 @@ namespace B1TJam2025
                 transform.position += 0.1f * Vector3.up;
                 State = PerpState.KO;
                 m_animator.SetTrigger("KO");
+                OnPerpKO?.Invoke();
+                StartCoroutine(RunDeathSequence());
             }
+        }
+
+        private IEnumerator RunDeathSequence()
+        {
+            yield return new WaitForSeconds(3f);
+
+            for (int i = 0; i < 20; i++)
+            {
+                m_body.enabled = !m_body.enabled;
+                yield return new WaitForSeconds(0.0333f);
+            }
+
+            Destroy(gameObject);
+        }
+
+
+        private void StartRunning()
+        {
+            if (!GameManager.TryGetRandomFleeTarget(transform, 20f, 40f, out Transform target))
+            {
+                return;
+            }
+
+            m_animator.SetBool("Run", true);
+            m_navMeshAgent.SetDestination(target.position);
         }
 
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, m_alertRadius);
+            Gizmos.DrawWireSphere(transform.position, m_settings.alertRadius);
+
+            if (Application.isPlaying && m_navMeshAgent.hasPath)
+            {
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawSphere(m_navMeshAgent.destination, 1f);
+            }
         }
     }
 }
