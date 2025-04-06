@@ -902,6 +902,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 228447410685080883, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4659179795762950945, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: _progressDialougeInputs.Array.size
       value: 4
@@ -917,6 +921,14 @@ PrefabInstance:
     - target: {fileID: 4659179795762950945, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: '_progressDialougeInputs.Array.data[4]'
       value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483015413722133516, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 5483015413722133516, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7268763336498550156, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: m_Name

@@ -260,10 +260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44033a8e25b76c1488adc2646ca5a088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c_Test: {fileID: 11400000, guid: b7728d34fde24bb459f4b05e59a0b98c, type: 2}
   _progressDialougeInputs: 2000000065000000
   _writer: {fileID: 8666151262446958554}
   _dialougeBox: {fileID: 6584069218047503663}
+  _canvas: {fileID: 5483015413722133516}
 --- !u!1 &5410551794742097470
 GameObject:
   m_ObjectHideFlags: 0

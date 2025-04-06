@@ -135,6 +135,7 @@ namespace B1TJam2025
                     case PerpState.Dialog:
                         m_animator.SetInteger("StandState", 1);
                         GameManager.Player.MoveTo(m_dialogLocation);
+                        DialougeManager.Canvas.worldCamera = m_dialogCamera;
                         m_dialogCamera.gameObject.SetActive(true);
                         GameManager.IsPaused = true;
                         RendererManager.SetColorsByName("Dialog");

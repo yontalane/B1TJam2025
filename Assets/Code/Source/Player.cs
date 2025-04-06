@@ -55,6 +55,9 @@ namespace B1TJam2025
         private TriggerOverlapChecker m_club;
 
         [SerializeField]
+        private Camera m_dialogCamera;
+
+        [SerializeField]
         private TriggerOverlapChecker m_interactionTrigger;
 
         [SerializeField]
@@ -76,6 +79,7 @@ namespace B1TJam2025
             m_animator = GetComponentInChildren<Animator>();
             m_animBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
             m_club = GetComponentInChildren<TriggerOverlapChecker>();
+            m_dialogCamera = GetComponentInChildren<Camera>();
             m_interactionTrigger = GetComponentInChildren<TriggerOverlapChecker>();
             m_nearbyPerpTrigger = GetComponentInChildren<TriggerOverlapChecker>();
 

@@ -27,6 +27,10 @@ namespace B1TJam2025
         [Tooltip("The dialouge box object")]
         private GameObject _dialougeBox;
 
+        [SerializeField]
+        [Tooltip("The canvas")]
+        private Canvas _canvas;
+
         //private vars
         private static DialougeManager s_instance;
         private Coroutine _conversationRoutine = null;
@@ -36,6 +40,9 @@ namespace B1TJam2025
         private Action<string> onTextClear;
         private void AddListenerToOnTextClear(Action<string> callback) => onTextClear += callback;
         private void RemoveListenerFromOnTextClear(Action<string> callback) => onTextClear -= callback;
+
+        //accessors
+        public static Canvas Canvas => s_instance._canvas;
 
         private void Awake()
         {
