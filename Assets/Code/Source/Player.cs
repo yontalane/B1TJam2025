@@ -3,6 +3,7 @@ using System.Collections;
 using B1TJam2025.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using B1TJam2025.AudioSystems;
 
 namespace B1TJam2025
 {
@@ -61,9 +62,9 @@ namespace B1TJam2025
         private TriggerOverlapChecker m_interactionTrigger;
 
         [SerializeField]
-
         private TriggerOverlapChecker m_nearbyPerpTrigger;
 
+        [SerializeField]
         private SFXPlayerSystem m_SFXSelectionSystem;
 
         [Header("Prefabs")]
@@ -316,7 +317,6 @@ namespace B1TJam2025
                         if(m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Air"))
                         {
                             //Air hit
-                            Debug.Log("Air Hit");
                             AudioManager.Instance.PlaySound(
                                 m_SFXSelectionSystem.SetsByName["Hit Air"].GetRandomSelection(),
                                 m_club.transform.position,
@@ -326,7 +326,6 @@ namespace B1TJam2025
                     else if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Wall"))
                     {
                         //Wall hit
-                        Debug.Log("Wall Hit");
                         AudioManager.Instance.PlaySound(
                             m_SFXSelectionSystem.SetsByName["Hit Wall"].GetRandomSelection(),
                             m_club.transform.position,
