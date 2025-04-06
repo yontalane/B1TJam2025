@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-namespace B1TJam2025
+namespace B1TJam2025.AudioSystems
 {
     public class SFXPlayerSystem : MonoBehaviour
     {

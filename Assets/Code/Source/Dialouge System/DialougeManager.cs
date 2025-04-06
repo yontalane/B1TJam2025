@@ -68,6 +68,8 @@ namespace B1TJam2025
             }
         }
 
+        public void ClickButton() => _input = true;
+
 
         public static void InitiateConversation(Conversation conversation, bool overrideCurrent = false)
         {

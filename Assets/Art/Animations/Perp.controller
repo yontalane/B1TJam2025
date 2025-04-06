@@ -157,9 +157,9 @@ AnimatorStateMachine:
   - {fileID: -902462236914396337}
   - {fileID: -1968885981973226924}
   m_EntryTransitions:
-  - {fileID: -7818535335193443558}
   - {fileID: -4971788580971903276}
   - {fileID: -3358119530301460047}
+  - {fileID: -7818535335193443558}
   m_StateMachineTransitions:
   - first: {fileID: 2611753765093417332}
     second:

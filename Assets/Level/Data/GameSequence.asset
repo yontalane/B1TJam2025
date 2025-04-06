@@ -14,19 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   escapeCountToLose: 2
   segments:
-  - type: 1
-    spawnTarget: Scripted Perp C
-    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
-    beatBeforeContinuing: 1
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
-    randomCount: 11
   - type: 0
     spawnTarget: Mission 1 Perp
     perp: {fileID: 11400000, guid: f8d3a740672e94895a45284913e35b0d, type: 2}
     beatBeforeContinuing: 1
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
+    beatBuddyAPB: {fileID: 11400000, guid: e6b3e73e8eceb47f493ceea02c8cbbed, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: 0364c68fdff1b407e8a7d3a2e4eb7153, type: 2}
     randomCount: 3
   - type: 0
     spawnTarget: Mission 2 Perp 1
@@ -49,3 +42,10 @@ MonoBehaviour:
     beatBuddyAPB: {fileID: 0}
     victorySoliloquy: {fileID: 0}
     randomCount: 2
+  - type: 1
+    spawnTarget: Scripted Perp C
+    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    beatBeforeContinuing: 1
+    beatBuddyAPB: {fileID: 0}
+    victorySoliloquy: {fileID: 0}
+    randomCount: 11

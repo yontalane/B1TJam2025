@@ -6,13 +6,20 @@ namespace B1TJam2025
     [DisallowMultipleComponent]
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(HintDisplay))]
     [AddComponentMenu("B1TJam2025/Vehicle")]
     public class Vehicle : MonoBehaviour
     {
+        public delegate void VehicleEventHandler(Vehicle vehicle);
+        public static VehicleEventHandler OnVehicleEntered = null;
+        public static VehicleEventHandler OnVehicleExited = null;
+
+
         private const float SLOW_ENOUGH_TO_STOP = 0.01f;
 
 
         private BoxCollider m_collider;
+        private HintDisplay m_hintDisplay;
         private bool m_beingDriven;
         private int m_gear;
         private float m_currentVelocity;
@@ -33,6 +40,11 @@ namespace B1TJam2025
 
         [SerializeField]
         private Vector2 m_outsideSpot;
+
+        [Space]
+
+        [SerializeField]
+        private TriggerOverlapChecker m_crashDetector;
 
 
         public float CurrentSpeed { get; private set; }
@@ -66,12 +78,34 @@ namespace B1TJam2025
         {
             m_topSpeed = 10f;
             m_acceleration = 1f;
+            m_rotationSpeed = 1f;
+            m_outsideSpot = default;
+
+            m_crashDetector = GetComponentInChildren<TriggerOverlapChecker>();
+        }
+
+
+        private void OnEnable()
+        {
+            if (m_crashDetector != null)
+            {
+                m_crashDetector.OnOverlapEnter += OnOverlapEnter;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (m_crashDetector != null)
+            {
+                m_crashDetector.OnOverlapEnter -= OnOverlapEnter;
+            }
         }
 
 
         private void Start()
         {
             m_collider = GetComponent<BoxCollider>();
+            m_hintDisplay = GetComponent<HintDisplay>();
             m_collider.isTrigger = false;
         }
 
@@ -98,9 +132,28 @@ namespace B1TJam2025
         }
 
 
+        private void OnOverlapEnter(Collider collider)
+        {
+            if (!m_beingDriven)
+            {
+                return;
+            }
+
+            if (collider.TryGetComponent(out Perp perp))
+            {
+                perp.GetKilled();
+            }
+            else
+            {
+                SFXManager.Play("HitWall", transform.position);
+            }
+        }
+
+
         public void StartRiding(CharacterController rider)
         {
             m_collider.enabled = false;
+            m_hintDisplay.IsEnabled = false;
 
             rider.transform.eulerAngles = transform.eulerAngles;
             Vector3 riderPosition = transform.position;
@@ -111,15 +164,22 @@ namespace B1TJam2025
             m_sliding = false;
             ResetSpeed();
             m_beingDriven = true;
+
+            OnVehicleEntered?.Invoke(this);
         }
 
         public void StopRiding()
         {
+            m_hintDisplay.IsEnabled = true;
+            m_hintDisplay.IsVisible = false;
+
             transform.SetParent(null, true);
             m_sliding = true;
             m_collider.enabled = true;
             m_collider.isTrigger = true;
             m_beingDriven = false;
+
+            OnVehicleExited?.Invoke(this);
         }
 
         private void ResetSpeed()

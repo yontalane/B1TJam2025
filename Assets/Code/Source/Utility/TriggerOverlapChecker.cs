@@ -9,6 +9,11 @@ namespace B1TJam2025.Utility
     [AddComponentMenu("B1TJam2025/Utility/Trigger Overlap Checker")]
     public class TriggerOverlapChecker : MonoBehaviour
     {
+        public delegate void TriggerOverlapHandler(Collider collider);
+        public TriggerOverlapHandler OnOverlapEnter = null;
+        public TriggerOverlapHandler OnOverlapExit = null;
+
+
         private readonly List<Collider> m_colliders = new();
 
 
@@ -51,6 +56,7 @@ namespace B1TJam2025.Utility
             }
 
             m_colliders.Add(other);
+            OnOverlapEnter?.Invoke(other);
         }
 
         private void OnTriggerExit(Collider other)
@@ -61,6 +67,7 @@ namespace B1TJam2025.Utility
             }
 
             m_colliders.Remove(other);
+            OnOverlapExit?.Invoke(other);
         }
 
         public bool TryGetOverlapByType<T>(out T overlap) where T : Component

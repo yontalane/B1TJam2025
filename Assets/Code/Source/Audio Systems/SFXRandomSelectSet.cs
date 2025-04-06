@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace B1TJam2025
+namespace B1TJam2025.AudioSystems
 {
     [Serializable]
     public class SFXRandomSelectSet

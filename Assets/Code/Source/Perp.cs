@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using B1TJam2025.Utility;
 
 namespace B1TJam2025
 {
@@ -75,6 +76,16 @@ namespace B1TJam2025
         private float m_alertStartTime;
 
 
+        [Header("Settings")]
+
+        [SerializeField]
+        [Min(0f)]
+        private float m_fleeRangeMin;
+
+        [SerializeField]
+        [Min(0f)]
+        private float m_fleeRangeMax;
+
         [Header("References")]
 
         [SerializeField]
@@ -95,6 +106,9 @@ namespace B1TJam2025
         [SerializeField]
         private Camera m_dialogCamera;
 
+        [SerializeField]
+        private AnimEventBroadcaster m_animEventBroadcaster;
+
         [Header("Prefabs")]
 
         [SerializeField]
@@ -102,6 +116,8 @@ namespace B1TJam2025
 
 
         public bool IsRandom { get; set; }
+
+        public Conversation VictorySpeech { get; set; }
 
         public PerpState State
         {
@@ -134,12 +150,15 @@ namespace B1TJam2025
 
                     case PerpState.Dialog:
                         m_animator.SetInteger("StandState", 1);
-                        GameManager.Player.MoveTo(m_dialogLocation);
-                        DialougeManager.Canvas.worldCamera = m_dialogCamera;
-                        m_dialogCamera.gameObject.SetActive(true);
-                        GameManager.IsPaused = true;
-                        RendererManager.SetColorsByName("Dialog");
-                        DialougeManager.InitiateConversation(m_settings.conversation);
+                        if (m_settings.hp > 0)
+                        {
+                            GameManager.Player.MoveTo(m_dialogLocation);
+                            DialougeManager.Canvas.worldCamera = m_dialogCamera;
+                            m_dialogCamera.gameObject.SetActive(true);
+                            GameManager.IsPaused = true;
+                            RendererManager.SetColorsByName("Dialog");
+                            DialougeManager.InitiateConversation(m_settings.conversation);
+                        }
                         break;
 
                     case PerpState.Cower:
@@ -167,6 +186,9 @@ namespace B1TJam2025
 
         private void Reset()
         {
+            m_fleeRangeMin = 20f;
+            m_fleeRangeMax = 40f;
+
             m_body = GetComponentInChildren<Renderer>();
             m_animator = GetComponentInChildren<Animator>();
             m_canvas = GetComponentInChildren<Canvas>();
@@ -180,11 +202,13 @@ namespace B1TJam2025
         private void OnEnable()
         {
             DialougeManager.OnDialougeComplete += OnDialogComplete;
+            m_animEventBroadcaster.OnAnimEvent += OnAnimEvent;
         }
 
         private void OnDisable()
         {
             DialougeManager.OnDialougeComplete -= OnDialogComplete;
+            m_animEventBroadcaster.OnAnimEvent -= OnAnimEvent;
         }
 
 
@@ -260,12 +284,32 @@ namespace B1TJam2025
         }
 
 
-        public void GetHit()
+        private void OnAnimEvent(AnimationEvent animationEvent)
         {
-            m_settings.hp--;
+            switch(animationEvent.stringParameter)
+            {
+                case "Step":
+                    SFXManager.Play("Step", transform.position, animationEvent.floatParameter);
+                    break;
+            }
+        }
+
+        public void GetHit() => GetHit(1);
+
+        public void GetKilled() => GetHit(999);
+
+        private void GetHit(int damage)
+        {
+            if (GameManager.IsPaused || m_dialogCamera.gameObject.activeSelf)
+            {
+                return;
+            }
+
+            m_settings.hp -= damage;
 
             if (m_settings.hp > 0)
             {
+                SFXManager.Play("Grunt", transform.position, 0.333f);
                 State = PerpState.Cower;
                 m_navMeshAgent.isStopped = true;
                 m_animator.SetInteger("Variance", Random.Range(0, 2));
@@ -273,6 +317,7 @@ namespace B1TJam2025
             }
             else
             {
+                SFXManager.Play("Grunt", transform.position, 1f);
                 transform.position += 0.1f * Vector3.up;
                 State = PerpState.KO;
                 m_animator.SetTrigger("KO");
@@ -297,7 +342,7 @@ namespace B1TJam2025
 
         private void StartRunning()
         {
-            if (!GameManager.TryGetRandomFleeTarget(transform, 20f, 40f, out Transform target))
+            if (!GameManager.TryGetRandomFleeTarget(transform, m_fleeRangeMin, m_fleeRangeMax, out Transform target))
             {
                 return;
             }

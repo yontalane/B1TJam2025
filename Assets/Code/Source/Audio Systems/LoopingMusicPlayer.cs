@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
 
-namespace B1TJam2025
+namespace B1TJam2025.AudioSystems
 {
     /// <summary>
     /// Plays a song on loop, with the ability to play a one-off Intro
     /// </summary>
     public class LoopingMusicPlayer : MonoBehaviour
     {
+        private float _originalVolume;
+
+
         [Header("Settings")]
         [Space(10)]
 
@@ -27,6 +30,11 @@ namespace B1TJam2025
 
         private void Awake()
         {
+            if (_musicSource != null)
+            {
+                _originalVolume = _musicSource.volume;
+            }
+
             StartSong();
         }
 
@@ -58,6 +66,7 @@ namespace B1TJam2025
             _musicSource.resource = _songIntro;
             _musicSource.time = 0;
             _musicSource.loop = false;
+            _musicSource.volume = _originalVolume * AudioManager.GlobalVolume;
             _musicSource.Play();
         }
 
@@ -66,7 +75,10 @@ namespace B1TJam2025
             _musicSource.resource = _songMain;
             _musicSource.time = 0;
             _musicSource.loop = true;
+            _musicSource.volume = _originalVolume * AudioManager.GlobalVolume;
             _musicSource.Play();
         }
+
+        public void RefreshVolume() => _musicSource.volume = _originalVolume * AudioManager.GlobalVolume;
     }
 }

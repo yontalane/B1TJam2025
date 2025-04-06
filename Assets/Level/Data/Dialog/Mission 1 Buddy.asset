@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f6fa4176db5c2409fcefb45b3e069e, type: 3}
+  m_Name: Mission 1 Buddy
+  m_EditorClassIdentifier: 
+  _lines:
+  - LineText: We've got an APB on a vandal in lowtown!
+    CharName: Beat Buddy
+    CharacterSprite: {fileID: 0}
+    FireEventOnClear: 0
+    EventCode: 
+  - LineText: That's my beat!
+    CharName: Beat Cop
+    CharacterSprite: {fileID: 0}
+    FireEventOnClear: 0
+    EventCode: 

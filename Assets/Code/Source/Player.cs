@@ -69,6 +69,26 @@ namespace B1TJam2025
         private ParticleSystem m_hitEffect;
 
 
+        public bool DialogCameraIsActive
+        {
+            get
+            {
+                return m_dialogCamera.gameObject.activeSelf;
+            }
+
+            set
+            {
+                if (value)
+                {
+                    DialougeManager.Canvas.worldCamera = m_dialogCamera;
+                }
+
+                m_dialogCamera.gameObject.SetActive(value);
+                GameManager.IsPaused = value;
+            }
+        }
+
+
         private void Reset()
         {
             m_speed = 5f;
@@ -90,11 +110,15 @@ namespace B1TJam2025
         private void OnEnable()
         {
             m_animBroadcaster.OnAnimEvent += OnAnimEvent;
+            m_interactionTrigger.OnOverlapEnter += OnPossibleInteractionEnter;
+            m_interactionTrigger.OnOverlapExit += OnPossibleInteractionExit;
         }
 
         private void OnDisable()
         {
             m_animBroadcaster.OnAnimEvent -= OnAnimEvent;
+            m_interactionTrigger.OnOverlapEnter -= OnPossibleInteractionEnter;
+            m_interactionTrigger.OnOverlapExit -= OnPossibleInteractionExit;
         }
 
 
@@ -261,17 +285,50 @@ namespace B1TJam2025
                     m_club.gameObject.SetActive(m_club.IsEnabled);
                     break;
 
-                case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO:
-                    perp.GetHit();
+                case "Step":
+                    SFXManager.Play("Step", transform.position, animationEvent.floatParameter);
+                    break;
 
-                    ParticleSystem effect = Instantiate(m_hitEffect);
-                    effect.transform.position = m_club.Collider.bounds.center;
-                    effect.transform.localEulerAngles = Vector3.zero;
-                    effect.transform.localScale = Vector3.one;
+                case "Hit" when m_club.IsEnabled:
+                    if (m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO)
+                    {
+                        SFXManager.Play("HitPerp", transform.position);
 
-                    Camera.main.GetComponent<Shake>().Activate();
+                        perp.GetHit();
+
+                        ParticleSystem effect = Instantiate(m_hitEffect);
+                        effect.transform.position = m_club.Collider.bounds.center;
+                        effect.transform.localEulerAngles = Vector3.zero;
+                        effect.transform.localScale = Vector3.one;
+
+                        Camera.main.GetComponent<Shake>().Activate();
+                    }
+                    else
+                    {
+                        SFXManager.Play("Whiff", transform.position);
+                    }
                     break;
             }
+        }
+
+        private void OnPossibleInteractionEnter(Collider collider)
+        {
+            if (!collider.TryGetComponent(out HintDisplay hintDisplay))
+            {
+                return;
+            }
+
+            hintDisplay.IsVisible = true;
+        }
+
+        private void OnPossibleInteractionExit(Collider collider)
+        {
+            if (!collider.TryGetComponent(out HintDisplay hintDisplay))
+            {
+                return;
+            }
+
+            hintDisplay.IsVisible = false;
         }
 
         private void RotateTowardClosest()

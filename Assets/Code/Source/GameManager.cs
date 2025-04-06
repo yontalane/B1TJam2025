@@ -29,6 +29,14 @@ namespace B1TJam2025
         [SerializeField]
         private GameSequence m_sequence;
 
+        [Header("Scene References")]
+
+        [SerializeField]
+        private GameObject m_footInstructions;
+
+        [SerializeField]
+        private GameObject m_vehicleInstructions;
+
         [Header("Prefabs")]
 
         [SerializeField]
@@ -51,6 +59,11 @@ namespace B1TJam2025
 
         private void Reset()
         {
+            m_sequence = null;
+
+            m_footInstructions = null;
+            m_vehicleInstructions = null;
+
             m_playerPrefab = null;
             m_subwayStopPrefab = null;
         }
@@ -61,6 +74,9 @@ namespace B1TJam2025
             Perp.OnPerpEscape += OnPerpEscape;
             Perp.OnPerpKO += OnPerpKO;
             PerpSpawnLocationManager.OnSpawnPerp += OnSpawnPerp;
+            Vehicle.OnVehicleEntered += OnVehicleEntered;
+            Vehicle.OnVehicleExited += OnVehicleExited;
+            DialougeManager.OnDialougeComplete += OnDialogComplete;
         }
 
         private void OnDisable()
@@ -68,6 +84,9 @@ namespace B1TJam2025
             Perp.OnPerpEscape -= OnPerpEscape;
             Perp.OnPerpKO -= OnPerpKO;
             PerpSpawnLocationManager.OnSpawnPerp -= OnSpawnPerp;
+            Vehicle.OnVehicleEntered -= OnVehicleEntered;
+            Vehicle.OnVehicleExited -= OnVehicleExited;
+            DialougeManager.OnDialougeComplete -= OnDialogComplete;
         }
 
 
@@ -180,7 +199,7 @@ namespace B1TJam2025
             }
         }
 
-        private void OnPerpKO(Perp _)
+        private void OnPerpKO(Perp perp)
         {
             TotalBeats++;
             m_perpsToBeat--;
@@ -190,6 +209,32 @@ namespace B1TJam2025
             {
                 SpawnRandomPerp();
             }
+
+            if (perp.VictorySpeech != null)
+            {
+                Player.DialogCameraIsActive = true;
+                DialougeManager.InitiateConversation(perp.VictorySpeech);
+            }
+        }
+
+        private void OnDialogComplete()
+        {
+            if (Player.DialogCameraIsActive)
+            {
+                Player.DialogCameraIsActive = false;
+            }
+        }
+
+        private void OnVehicleEntered(Vehicle _)
+        {
+            m_footInstructions.SetActive(false);
+            m_vehicleInstructions.SetActive(true);
+        }
+
+        private void OnVehicleExited(Vehicle _)
+        {
+            m_footInstructions.SetActive(true);
+            m_vehicleInstructions.SetActive(false);
         }
 
 
@@ -217,6 +262,12 @@ namespace B1TJam2025
                 m_perpsToBeat += segment.randomCount;
                 SpawnRandomPerp();
             }
+
+            if (segment.beatBuddyAPB != null)
+            {
+                Player.DialogCameraIsActive = true;
+                DialougeManager.InitiateConversation(segment.beatBuddyAPB);
+            }
         }
 
         private void InitializeScriptedSegment(GameSequenceSegment segment)
@@ -242,6 +293,7 @@ namespace B1TJam2025
 
             if (instance.TryGetComponent(out Perp perp))
             {
+                perp.VictorySpeech = segment.victorySoliloquy;
                 perp.IsRandom = false;
             }
 

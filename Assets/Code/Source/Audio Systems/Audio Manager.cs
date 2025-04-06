@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace B1TJam2025
+namespace B1TJam2025.AudioSystems
 {
     public class AudioManager : MonoBehaviour
     {
@@ -12,10 +12,21 @@ namespace B1TJam2025
         /// </summary>
         public static AudioManager Instance {get; private set;}
 
+        /// <summary>
+        /// The volume of every sound is multiplied by this.
+        /// </summary>
+        public static float GlobalVolume
+        {
+            get => s_globalVolume;
+            set => s_globalVolume = Mathf.Clamp01(value);
+        }
+
         [Header("Refrences")]
         [SerializeField]
         [Tooltip("Mixer to direct sfx to")]
         AudioMixerGroup _SFXMixerGroup;
+
+        private static float s_globalVolume = 1f;
 
         //object pool
         private readonly List<GameObject> _audioSourcePool = new();
@@ -48,7 +59,7 @@ namespace B1TJam2025
 
             //assigns data
             obj.transform.position = position;
-            src.volume = _volumeVals[volume];
+            src.volume = _volumeVals[volume] * GlobalVolume;
 
             //play
             src.PlayOneShot(clip);
@@ -73,7 +84,7 @@ namespace B1TJam2025
 
             //assigns data
             obj.transform.position = position;
-            src.volume = volume;
+            src.volume = volume * GlobalVolume;
 
             //play
             src.PlayOneShot(clip);
@@ -99,7 +110,7 @@ namespace B1TJam2025
 
             //assigns data
             obj.transform.position = objToTrack.position;
-            src.volume = _volumeVals[volume];
+            src.volume = _volumeVals[volume] * GlobalVolume;
 
             //play
             src.PlayOneShot(clip);
@@ -125,7 +136,7 @@ namespace B1TJam2025
 
             //assigns data
             obj.transform.position = objToTrack.position;
-            src.volume = volume;
+            src.volume = volume * GlobalVolume;
 
             //play
             src.PlayOneShot(clip);
