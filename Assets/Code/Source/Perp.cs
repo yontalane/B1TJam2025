@@ -37,6 +37,11 @@ namespace B1TJam2025
 
         [Min(0f)]
         public float alertTimeBeforeAction;
+
+        [Tooltip("Only used if Behavior is Dialog.")]
+        public Conversation conversation;
+
+        public bool runAfterDialog;
     }
 
     public enum PerpType
@@ -132,8 +137,8 @@ namespace B1TJam2025
                         GameManager.Player.MoveTo(m_dialogLocation);
                         m_dialogCamera.gameObject.SetActive(true);
                         GameManager.IsPaused = true;
-
                         RendererManager.SetColorsByName("Dialog");
+                        DialougeManager.InitiateConversation(m_settings.conversation);
                         break;
 
                     case PerpState.Cower:
@@ -171,6 +176,17 @@ namespace B1TJam2025
         }
 
 
+        private void OnEnable()
+        {
+            DialougeManager.OnDialougeComplete += OnDialogComplete;
+        }
+
+        private void OnDisable()
+        {
+            DialougeManager.OnDialougeComplete -= OnDialogComplete;
+        }
+
+
         private void Start()
         {
             m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -196,7 +212,6 @@ namespace B1TJam2025
             if (m_firstPass)
             {
                 m_animator.SetInteger("PerpType", (int)m_settings.type);
-                Debug.Log($"Setting type of {name} to {m_settings.type}.");
                 m_firstPass = false;
             }
 
@@ -288,6 +303,21 @@ namespace B1TJam2025
 
             m_animator.SetBool("Run", true);
             m_navMeshAgent.SetDestination(target.position);
+        }
+
+
+        private void OnDialogComplete()
+        {
+            if (State != PerpState.Dialog)
+            {
+                return;
+            }
+
+            State = m_settings.runAfterDialog ? PerpState.Run : PerpState.Cower;
+
+            m_dialogCamera.gameObject.SetActive(false);
+            GameManager.IsPaused = false;
+            RendererManager.ResetColors();
         }
 
 

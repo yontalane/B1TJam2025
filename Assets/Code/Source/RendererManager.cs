@@ -25,6 +25,7 @@ namespace B1TJam2025
         private FullScreenPassRendererFeature m_rendererFeature;
         private Material m_rendererFeatureOriginalMaterial;
         private Material m_rendererFeatureInstanceMaterial;
+        private MonochromeSet m_defaultSet;
 
 
         [Header("Color Sets")]
@@ -69,10 +70,27 @@ namespace B1TJam2025
                 m_rendererFeatureInstanceMaterial = Instantiate(m_rendererFeatureOriginalMaterial);
                 m_rendererFeature.passMaterial = m_rendererFeatureInstanceMaterial;
 
+                m_defaultSet = new()
+                {
+                    colorA = m_rendererFeatureInstanceMaterial.GetColor("_ColorA"),
+                    colorB = m_rendererFeatureInstanceMaterial.GetColor("_ColorB"),
+                };
+
                 m_initialized = true;
             }
         }
 
+
+        public static void ResetColors()
+        {
+            if (!s_instance.m_initialized)
+            {
+                return;
+            }
+
+            s_instance.m_rendererFeatureInstanceMaterial.SetColor("_ColorA", s_instance.m_defaultSet.colorA);
+            s_instance.m_rendererFeatureInstanceMaterial.SetColor("_ColorB", s_instance.m_defaultSet.colorB);
+        }
 
         public static void SetColorsByName(string setName)
         {
@@ -81,7 +99,7 @@ namespace B1TJam2025
                 return;
             }
 
-            foreach(MonochromeSet colorSet in s_instance.m_sets)
+            foreach (MonochromeSet colorSet in s_instance.m_sets)
             {
                 if (colorSet.name != setName)
                 {

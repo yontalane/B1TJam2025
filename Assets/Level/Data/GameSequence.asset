@@ -21,7 +21,7 @@ MonoBehaviour:
     randomCount: 3
   - type: 0
     spawnTarget: Scripted Perp B
-    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    perp: {fileID: 11400000, guid: 21699c2538c684fb1bb49a0aa7076f83, type: 2}
     beatBeforeContinuing: 1
     randomCount: 3
   - type: 0

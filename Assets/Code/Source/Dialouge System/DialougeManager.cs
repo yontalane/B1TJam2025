@@ -7,6 +7,10 @@ namespace B1TJam2025
 {
     public class DialougeManager : MonoBehaviour
     {
+        public delegate void DialougeEventHandler();
+        public static DialougeEventHandler OnDialougeComplete = null;
+
+
         [Header("Settings")]
 
         [SerializeField]
@@ -24,6 +28,7 @@ namespace B1TJam2025
         private GameObject _dialougeBox;
 
         //private vars
+        private static DialougeManager s_instance;
         private Coroutine _conversationRoutine = null;
         private bool _input = false;
 
@@ -34,7 +39,11 @@ namespace B1TJam2025
 
         private void Awake()
         {
-            if(_writer == null) _writer = FindAnyObjectByType<DialougeWriter>(); //if not assigned, finds in scene
+            //singleton pattern
+            if (s_instance != null) Destroy(this);
+            else s_instance = this;
+
+            if (_writer == null) _writer = FindAnyObjectByType<DialougeWriter>(); //if not assigned, finds in scene
         }
 
         private void Update()
@@ -53,17 +62,17 @@ namespace B1TJam2025
         }
 
 
-        public void InitiateConversation(Conversation conversation, bool overrideCurrent = false)
+        public static void InitiateConversation(Conversation conversation, bool overrideCurrent = false)
         {
-            if(_conversationRoutine != null)
+            if (s_instance._conversationRoutine != null)
             {
                 if (overrideCurrent)
                 {
-                    StopCoroutine(_conversationRoutine);
-                    _conversationRoutine = StartCoroutine(ConversationRoutine(conversation));
+                    s_instance.StopCoroutine(s_instance._conversationRoutine);
+                    s_instance._conversationRoutine = s_instance.StartCoroutine(s_instance.ConversationRoutine(conversation));
                 }
             }
-            else _conversationRoutine = StartCoroutine(ConversationRoutine(conversation));
+            else s_instance._conversationRoutine = s_instance.StartCoroutine(s_instance.ConversationRoutine(conversation));
         }
 
         private IEnumerator ConversationRoutine(Conversation c)
@@ -106,6 +115,8 @@ namespace B1TJam2025
 
             _dialougeBox.SetActive(false);
             _conversationRoutine = null;
+
+            OnDialougeComplete?.Invoke();
         }
 
     }

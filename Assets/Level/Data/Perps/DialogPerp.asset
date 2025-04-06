@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _perpPrefab: {fileID: 4424540667960206055, guid: aaa37484bf040451dafa3462a34fffba, type: 3}
   m_perpSettings:
-    behavior: 0
+    type: 0
+    behavior: 10
     hp: 3
     alertRadius: 2.25
     alertTimeBeforeAction: 4
+    conversation: {fileID: 11400000, guid: 325f55a5fa5804d7fac747017da99c2d, type: 2}
+    runAfterDialog: 0
