@@ -61,7 +61,10 @@ namespace B1TJam2025
         private TriggerOverlapChecker m_interactionTrigger;
 
         [SerializeField]
+
         private TriggerOverlapChecker m_nearbyPerpTrigger;
+
+        private SFXPlayerSystem m_SFXSelectionSystem;
 
         [Header("Prefabs")]
 
@@ -289,24 +292,55 @@ namespace B1TJam2025
                     SFXManager.Play("Step", transform.position, animationEvent.floatParameter);
                     break;
 
-                case "Hit" when m_club.IsEnabled:
-                    if (m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO)
+                case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO:
+
+                    Camera.main.GetComponent<Shake>().Activate();
+
+                    //sfx
+                    if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Flesh"))
                     {
-                        SFXManager.Play("HitPerp", transform.position);
-
-                        perp.GetHit();
-
-                        ParticleSystem effect = Instantiate(m_hitEffect);
-                        effect.transform.position = m_club.Collider.bounds.center;
-                        effect.transform.localEulerAngles = Vector3.zero;
-                        effect.transform.localScale = Vector3.one;
-
-                        Camera.main.GetComponent<Shake>().Activate();
+                        AudioManager.Instance.PlaySound(m_SFXSelectionSystem.SetsByName["Hit Flesh"].GetRandomSelection(), m_club.transform.position, AudioManager.Volume.MediumSoft);
                     }
-                    else
+                    if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hurt Voice"))
                     {
-                        SFXManager.Play("Whiff", transform.position);
+                        AudioManager.Instance.PlaySoundOnDelay(0.175f, m_SFXSelectionSystem.SetsByName["Hurt Voice"].GetRandomSelection(), m_club.transform.position, AudioManager.Volume.Loud);
                     }
+
+                    break;
+
+                case "Hit" when m_club.IsEnabled && m_SFXSelectionSystem != null && !m_club.TryGetOverlapByType(out Perp _):
+                    //for wall and air hit sfx
+                    Collider[] cols = Physics.OverlapSphere(m_club.transform.position, 0.5f, LayerMask.GetMask("Wall"));
+                    if(cols.Length == 0)
+                    {
+                        if(m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Air"))
+                        {
+                            //Air hit
+                            Debug.Log("Air Hit");
+                            AudioManager.Instance.PlaySound(
+                                m_SFXSelectionSystem.SetsByName["Hit Air"].GetRandomSelection(),
+                                m_club.transform.position,
+                                Random.Range(0.10f, 0.25f));
+                        }
+                    }
+                    else if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Wall"))
+                    {
+                        //Wall hit
+                        Debug.Log("Wall Hit");
+                        AudioManager.Instance.PlaySound(
+                            m_SFXSelectionSystem.SetsByName["Hit Wall"].GetRandomSelection(),
+                            m_club.transform.position,
+                            Random.Range(0.30f, 0.45f));
+                    }
+
+                    break;
+                case "Footstep" when m_SFXSelectionSystem != null && m_SFXSelectionSystem.SetsByName.ContainsKey("Footstep"):
+                    //footsteps sfx
+                    AudioManager.Instance.PlaySound(
+                        m_SFXSelectionSystem.SetsByName["Footstep"].GetRandomSelection(),
+                        transform.position,
+                        animationEvent.floatParameter);
+
                     break;
             }
         }
