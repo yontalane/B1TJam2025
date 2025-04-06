@@ -3425,6 +3425,9 @@ MonoBehaviour:
   - name: Dialog
     colorA: {r: 0.015686275, g: 0.09019608, b: 0.23529412, a: 0}
     colorB: {r: 1, g: 0.5019608, b: 0, a: 0}
+  - name: PerpHit
+    colorA: {r: 0.24528301, g: 0.06579573, b: 0.051370595, a: 0}
+    colorB: {r: 0.509434, g: 0.10418831, b: 0.07208964, a: 0}
   m_renderer: {fileID: 11400000, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
 --- !u!4 &2011638775
 Transform:

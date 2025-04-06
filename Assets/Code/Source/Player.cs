@@ -255,6 +255,13 @@ namespace B1TJam2025
             }
         }
 
+        private IEnumerator ChangeColorTemporary(float duration, string palleteName)
+        {
+            RendererManager.SetColorsByName(palleteName);
+            yield return new WaitForSeconds(duration);
+            RendererManager.ResetColors();
+        }
+
 
         public void MoveTo(Transform target)
         {
@@ -296,6 +303,9 @@ namespace B1TJam2025
                 case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO:
 
                     Camera.main.GetComponent<Shake>().Activate();
+
+                    //color change
+                    StartCoroutine(ChangeColorTemporary(0.2f, "PerpHit"));
 
                     //sfx
                     if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Flesh"))
