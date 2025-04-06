@@ -14,7 +14,7 @@ namespace B1TJam2025
     public class PerpSpawnLocationManager : MonoBehaviour
     {
         //delegates
-        public delegate void SpawnPerpHandler(GameObject perp);
+        public delegate void SpawnPerpHandler(GameObject perp, Vector3 spawnLocation);
         public static SpawnPerpHandler OnSpawnPerp = null;
 
         //private statics
@@ -63,7 +63,7 @@ namespace B1TJam2025
                 PerpSpawnPoint spawn = _perpSpawns[UnityEngine.Random.Range(0, _perpSpawns.Count)];
                 perpObj.transform.SetPositionAndRotation(spawn.Position, spawn.Rotation);
 
-                OnSpawnPerp?.Invoke(perpObj);
+                OnSpawnPerp?.Invoke(perpObj, spawn.Position);
             }
         }
 

@@ -21,6 +21,12 @@ namespace B1TJam2025
         [Tooltip("Does the player need to beat the perp in this sequence before we activate the next segment?")]
         public bool beatBeforeContinuing;
 
+        [Tooltip("Dialog with Beat Buddy announcing this crime.")]
+        public Conversation beatBuddyAPB;
+
+        [Tooltip("Beat Cop's soliloquy after making the arrest.")]
+        public Conversation victorySoliloquy;
+
         // Random
 
         [Tooltip("How many randomly spawned perps does the player need to beat before proceeding to the next segment?")]

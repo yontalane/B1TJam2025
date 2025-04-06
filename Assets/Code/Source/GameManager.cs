@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEngine.AI;
 using UnityEngine;
 
 namespace B1TJam2025
@@ -142,14 +143,19 @@ namespace B1TJam2025
             Debug.Log($"Random perp spawned.");
         }
 
-        private void OnSpawnPerp(GameObject perpObj)
+        private void OnSpawnPerp(GameObject perpObj, Vector3 spawnLocation)
         {
-            if (!perpObj.TryGetComponent(out Perp perp))
+            perpObj.name = $"Random Perp";
+
+            if (perpObj.TryGetComponent(out NavMeshAgent navMeshAgent))
             {
-                return;
+                navMeshAgent.Warp(spawnLocation);
             }
 
-            perp.IsRandom = true;
+            if (perpObj.TryGetComponent(out Perp perp))
+            {
+                perp.IsRandom = true;
+            }
         }
 
         private void OnPerpEscape(Perp perp)
@@ -224,9 +230,15 @@ namespace B1TJam2025
             }
 
             GameObject instance = segment.perp.SpawnPerp();
-            instance.transform.position = spawnTarget.transform.position;
+            instance.name = $"Perp at {spawnTarget.name}";
+
             instance.transform.eulerAngles = spawnTarget.transform.eulerAngles;
             instance.transform.localScale = Vector3.one;
+
+            if (instance.TryGetComponent(out NavMeshAgent navMeshAgent))
+            {
+                navMeshAgent.Warp(spawnTarget.transform.position);
+            }
 
             if (instance.TryGetComponent(out Perp perp))
             {

@@ -332,7 +332,7 @@ namespace B1TJam2025
                 Gizmos.DrawSphere(transform.position, 3f);
             }
 
-            if (Application.isPlaying && m_navMeshAgent.hasPath)
+            if (Application.isPlaying && m_navMeshAgent != null && m_navMeshAgent.hasPath)
             {
                 Gizmos.color = Color.magenta;
                 Gizmos.DrawSphere(m_navMeshAgent.destination, 3f);
