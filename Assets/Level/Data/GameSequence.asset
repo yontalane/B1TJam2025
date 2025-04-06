@@ -25,22 +25,22 @@ MonoBehaviour:
     spawnTarget: Mission 2 Perp 1
     perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
     beatBeforeContinuing: 0
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
+    beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
     randomCount: 3
   - type: 0
     spawnTarget: Mission 2 Perp 2
     perp: {fileID: 11400000, guid: 18d889abe8112499c8d5fbc908dbba67, type: 2}
     beatBeforeContinuing: 0
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
+    beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
     randomCount: 3
   - type: 0
     spawnTarget: Mission 2 Perp 3
     perp: {fileID: 11400000, guid: c7f6d1401d37c4f579a68225b588591c, type: 2}
     beatBeforeContinuing: 1
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
+    beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
     randomCount: 2
   - type: 1
     spawnTarget: Scripted Perp C

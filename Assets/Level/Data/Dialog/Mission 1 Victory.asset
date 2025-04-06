@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mission 1 Victory
   m_EditorClassIdentifier: 
   _lines:
-  - LineText: 'That''s justice: served, delivered, and on the beat!'
+  - LineText: JUSTICE DELIVERED. No paint; only blood.
     CharName: Beat Buddy
     CharacterSprite: {fileID: 0}
     FireEventOnClear: 0

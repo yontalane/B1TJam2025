@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0717c9d5db748ad9e664eb6f52fd9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 3
+  m_speed: 4
   m_rotationSpeed: 0.1
   m_boredIntervalMin: 6
   m_boredIntervalMax: 8

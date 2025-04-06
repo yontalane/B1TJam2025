@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Mission 1 Buddy
   m_EditorClassIdentifier: 
   _lines:
-  - LineText: We've got an APB on a vandal in lowtown!
+  - LineText: 'APB: Graffiti vandal sighted in North Central.'
     CharName: Beat Buddy
     CharacterSprite: {fileID: 0}
     FireEventOnClear: 0
     EventCode: 
-  - LineText: That's my beat!
+  - LineText: 'Murals on my beat?
+
+      I. Don''t. Think. So.'
     CharName: Beat Cop
     CharacterSprite: {fileID: 0}
     FireEventOnClear: 0
