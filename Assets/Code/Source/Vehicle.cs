@@ -24,6 +24,7 @@ namespace B1TJam2025
         private int m_gear;
         private float m_currentVelocity;
         private bool m_sliding;
+        private float m_y;
 
 
         [SerializeField]
@@ -40,6 +41,9 @@ namespace B1TJam2025
 
         [SerializeField]
         private Vector2 m_outsideSpot;
+
+        [SerializeField]
+        private int m_animationIndex;
 
         [Space]
 
@@ -73,6 +77,8 @@ namespace B1TJam2025
             set => m_gear = value;
         }
 
+        public int AnimationIndex => m_animationIndex;
+
 
         private void Reset()
         {
@@ -80,6 +86,7 @@ namespace B1TJam2025
             m_acceleration = 1f;
             m_rotationSpeed = 1f;
             m_outsideSpot = default;
+            m_animationIndex = 0;
 
             m_crashDetector = GetComponentInChildren<TriggerOverlapChecker>();
         }
@@ -107,6 +114,7 @@ namespace B1TJam2025
             m_collider = GetComponent<BoxCollider>();
             m_hintDisplay = GetComponent<HintDisplay>();
             m_collider.isTrigger = false;
+            m_y = transform.position.y;
         }
 
         private void Update()
@@ -129,6 +137,16 @@ namespace B1TJam2025
 
                 transform.Translate(Time.deltaTime * CurrentSpeed * transform.forward, Space.World);
             }
+        }
+
+        private void LateUpdate()
+        {
+            transform.position = new()
+            {
+                x = transform.position.x,
+                y = m_y,
+                z = transform.position.z,
+            };
         }
 
 
@@ -196,7 +214,7 @@ namespace B1TJam2025
                 return;
             }
 
-            // HACK: The following two checks should be handled with layers.
+            // HACK: The following checks should be handled with layers. Or just something that's not this.
             if (collider.TryGetComponent(out Player _))
             {
                 return;
@@ -206,6 +224,18 @@ namespace B1TJam2025
             {
                 return;
             }
+
+            if (LayerMask.LayerToName(collider.gameObject.layer) == "Surface")
+            {
+                return;
+            }
+
+            if (collider.TryGetComponent(out CityMap _))
+            {
+                return;
+            }
+
+            SFXManager.Play("HitWall", transform.position);
 
             CurrentSpeed *= -0.2f;
         }

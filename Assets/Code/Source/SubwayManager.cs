@@ -63,17 +63,14 @@ namespace B1TJam2025
 
             foreach (SubwayStop stop in stops)
             {
-                if (stop == subwayStop)
-                {
-                    continue;
-                }
-
                 Button b = Instantiate(s_instance.m_buttonPrefab);
                 b.transform.SetParent(s_instance.m_buttonContainer);
 
                 b.transform.localPosition = Vector3.zero;
                 b.transform.localEulerAngles = Vector3.zero;
                 b.transform.localScale = Vector3.one;
+
+                b.interactable = stop != subwayStop;
 
                 string name = stop.Name;
 

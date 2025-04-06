@@ -310,6 +310,15 @@ namespace B1TJam2025
                     //sfx
                     if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Flesh"))
                     {
+                        perp.GetHit();
+
+                        ParticleSystem effect = Instantiate(m_hitEffect);
+                        effect.transform.position = m_club.Collider.bounds.center;
+                        effect.transform.localEulerAngles = Vector3.zero;
+                        effect.transform.localScale = Vector3.one;
+
+                        Camera.main.GetComponent<Shake>().Activate();
+
                         AudioManager.Instance.PlaySound(m_SFXSelectionSystem.SetsByName["Hit Flesh"].GetRandomSelection(), m_club.transform.position, AudioManager.Volume.MediumSoft);
                     }
                     if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hurt Voice"))
@@ -343,6 +352,7 @@ namespace B1TJam2025
                     }
 
                     break;
+
                 case "Footstep" when m_SFXSelectionSystem != null && m_SFXSelectionSystem.SetsByName.ContainsKey("Footstep"):
                     //footsteps sfx
                     AudioManager.Instance.PlaySound(
@@ -406,9 +416,16 @@ namespace B1TJam2025
 
         private bool TryInteract()
         {
+            if (m_ridingVehicle)
+            {
+                return false;
+            }
+
             if (m_interactionTrigger.TryGetOverlapByType(out Vehicle vehicle))
             {
                 m_interactionTrigger.IsEnabled = false;
+
+                m_animator.SetInteger("RideVariation", vehicle.AnimationIndex);
 
                 m_animator.SetBool("Ride", true);
 
