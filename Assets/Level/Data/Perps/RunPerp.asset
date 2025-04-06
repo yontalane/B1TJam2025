@@ -18,3 +18,4 @@ MonoBehaviour:
     hp: 3
     alertRadius: 2.25
     alertTimeBeforeAction: 4
+    type: 3

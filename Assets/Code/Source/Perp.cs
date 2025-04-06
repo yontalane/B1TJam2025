@@ -25,6 +25,8 @@ namespace B1TJam2025
     [System.Serializable]
     public struct PerpSettings
     {
+        public PerpType type;
+
         public PerpBehavior behavior;
 
         [Range(1, 5)]
@@ -35,6 +37,15 @@ namespace B1TJam2025
 
         [Min(0f)]
         public float alertTimeBeforeAction;
+    }
+
+    public enum PerpType
+    {
+        Unassuming = 0,
+        Protester = 1,
+        SittingOnGround = 2,
+        Graffiti = 3,
+        WalkWIP = 4,
     }
 
     [DisallowMultipleComponent]
@@ -51,6 +62,7 @@ namespace B1TJam2025
         private const float PERCENT_OF_RADIUS_BEFORE_ACTION = 0.5f;
 
 
+        private bool m_firstPass = true;
         private PerpSettings m_settings;
         private NavMeshAgent m_navMeshAgent;
         private bool m_playerWasInAlertZone;
@@ -181,6 +193,12 @@ namespace B1TJam2025
 
         private void LateUpdate()
         {
+            if (m_firstPass)
+            {
+                m_animator.SetInteger("PerpType", (int)m_settings.type);
+                m_firstPass = false;
+            }
+
             float distanceToPlayer = Vector3.Distance(transform.position, GameManager.Player.transform.position);
             bool playerIsInAlertZone = distanceToPlayer < m_settings.alertRadius;
             bool playerJustEnteredAlertZone = !m_playerWasInAlertZone && playerIsInAlertZone;
