@@ -12500,7 +12500,7 @@ GameObject:
   - component: {fileID: 2891668836220829731}
   - component: {fileID: 2159819942120186979}
   m_Layer: 0
-  m_Name: Scripted Perp A
+  m_Name: Mission 1 Perp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12515,7 +12515,7 @@ Transform:
   m_GameObject: {fileID: 750159412952602496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.19, y: 0, z: -9.6}
+  m_LocalPosition: {x: -13.98, y: 0, z: 18.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -12546,7 +12546,7 @@ GameObject:
   - component: {fileID: 6057346449417130516}
   - component: {fileID: 4323227620596642195}
   m_Layer: 0
-  m_Name: Scripted Perp C
+  m_Name: Mission 2 Perp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12560,13 +12560,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738573323397809058}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.35374075, z: -0, w: 0.93534356}
-  m_LocalPosition: {x: -1.27, y: 0, z: -8.41}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32, y: 0, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4160742375683357133}
-  m_LocalEulerAnglesHint: {x: 0, y: 41.433, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4323227620596642195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20529,6 +20529,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 72, y: 1, z: 109}
   m_Center: {x: -18, y: 0, z: -26}
+--- !u!1 &6281486093733420642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3528011182113203875}
+  - component: {fileID: 7817634454561880254}
+  m_Layer: 0
+  m_Name: Mission 2 Perp 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3528011182113203875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281486093733420642}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32, y: 0, z: -12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4160742375683357133}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7817634454561880254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6281486093733420642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd971d5cda4d19aef6386f2de2730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_name: 
+  m_type: 0
 --- !u!1 &6360857780531507560
 GameObject:
   m_ObjectHideFlags: 0
@@ -20540,7 +20586,7 @@ GameObject:
   - component: {fileID: 3195911463876810512}
   - component: {fileID: 6567992674872954871}
   m_Layer: 0
-  m_Name: Scripted Perp B
+  m_Name: Mission 2 Perp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20555,7 +20601,7 @@ Transform:
   m_GameObject: {fileID: 6360857780531507560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.24, y: 0, z: -9.6}
+  m_LocalPosition: {x: -32, y: 0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -20614,6 +20660,7 @@ Transform:
   - {fileID: 2891668836220829731}
   - {fileID: 3195911463876810512}
   - {fileID: 6057346449417130516}
+  - {fileID: 3528011182113203875}
   m_Father: {fileID: 8412819052909315471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &46680865298096476

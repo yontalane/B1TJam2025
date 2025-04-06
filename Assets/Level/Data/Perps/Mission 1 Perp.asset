@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f38fd5280954c4777ae12c805654a6f8, type: 3}
-  m_Name: RunPerp
+  m_Name: Mission 1 Perp
   m_EditorClassIdentifier: 
   _perpPrefab: {fileID: 4424540667960206055, guid: aaa37484bf040451dafa3462a34fffba, type: 3}
   m_perpSettings:
-    behavior: 20
+    type: 3
+    behavior: 10
     hp: 3
     alertRadius: 2.25
     alertTimeBeforeAction: 4
-    type: 3
+    conversation: {fileID: 11400000, guid: 5aa847d349dab4298a7508c34e889566, type: 2}
+    runAfterDialog: 1
