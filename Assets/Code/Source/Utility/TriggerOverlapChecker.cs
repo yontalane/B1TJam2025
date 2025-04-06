@@ -82,5 +82,29 @@ namespace B1TJam2025.Utility
             overlap = null;
             return false;
         }
+
+        public int GetOverlapsByType<T>(List<T> overlaps) where T : Component
+        {
+            overlaps ??= new();
+            overlaps.Clear();
+            int count = 0;
+
+            for (int i = m_colliders.Count - 1; i >= 0; i--)
+            {
+                if (m_colliders[i] == null)
+                {
+                    m_colliders.RemoveAt(i);
+                    continue;
+                }
+
+                if (m_colliders[i].TryGetComponent(out T overlap))
+                {
+                    overlaps.Add(overlap);
+                    count++;
+                }
+            }
+
+            return count;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using B1TJam2025.Utility;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace B1TJam2025
         private bool m_ridingVehicle;
         private Vehicle m_vehicle;
         private bool m_cheatSprint;
+        private readonly List<Perp> m_perps = new();
 
 
         [Header("Settings")]
@@ -55,6 +57,9 @@ namespace B1TJam2025
         [SerializeField]
         private TriggerOverlapChecker m_interactionTrigger;
 
+        [SerializeField]
+        private TriggerOverlapChecker m_nearbyPerpTrigger;
+
         [Header("Prefabs")]
 
         [SerializeField]
@@ -72,6 +77,7 @@ namespace B1TJam2025
             m_animBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
             m_club = GetComponentInChildren<TriggerOverlapChecker>();
             m_interactionTrigger = GetComponentInChildren<TriggerOverlapChecker>();
+            m_nearbyPerpTrigger = GetComponentInChildren<TriggerOverlapChecker>();
 
             m_hitEffect = null;
         }
@@ -264,6 +270,36 @@ namespace B1TJam2025
             }
         }
 
+        private void RotateTowardClosest()
+        {
+            int count = m_nearbyPerpTrigger.GetOverlapsByType(m_perps);
+
+            if (count == 0)
+            {
+                return;
+            }
+
+            float distance = float.MaxValue;
+            int index = -1;
+
+            for (int i = 0; i < count; i++)
+            {
+                float newDistance = Vector3.Distance(transform.position, m_perps[i].transform.position);
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    index = i;
+                }
+            }
+
+            if (index == -1)
+            {
+                return;
+            }
+
+            transform.LookAt(m_perps[index].transform, Vector3.up);
+        }
+
         private bool TryInteract()
         {
             if (m_interactionTrigger.TryGetOverlapByType(out Vehicle vehicle))
@@ -355,6 +391,8 @@ namespace B1TJam2025
             {
                 return;
             }
+
+            RotateTowardClosest();
 
             SetRandomVariation();
             m_animator.SetTrigger("Beat");
