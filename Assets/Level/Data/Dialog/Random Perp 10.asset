@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f6fa4176db5c2409fcefb45b3e069e, type: 3}
+  m_Name: Random Perp 10
+  m_EditorClassIdentifier: 
+  _lines:
+  - LineText: 'Dine and dash? I would never.
+
+      I''m simply practicing for the
+      marathon on a full stomach.'
+    CharName: The Burpist
+    CharacterSprite: {fileID: 0}
+    FireEventOnClear: 0
+    EventCode: 

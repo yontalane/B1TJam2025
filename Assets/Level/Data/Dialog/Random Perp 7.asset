@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0f6fa4176db5c2409fcefb45b3e069e, type: 3}
-  m_Name: TestConvo
+  m_Name: Random Perp 7
   m_EditorClassIdentifier: 
   _lines:
-  - LineText: Hey man.
-    CharName: Freddie
-    CharacterSprite: {fileID: 0}
-    FireEventOnClear: 0
-    EventCode: 
-  - LineText: What's up?
-    CharName: Freddie
+  - LineText: 'I was returning this shopping cart TO the store.
+
+      That''s reverse
+      theft!'
+    CharName: Cartman
     CharacterSprite: {fileID: 0}
     FireEventOnClear: 0
     EventCode: 

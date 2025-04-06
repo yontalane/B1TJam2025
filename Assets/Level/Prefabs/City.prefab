@@ -12561,7 +12561,7 @@ Transform:
   m_GameObject: {fileID: 1738573323397809058}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.19, y: 0.93, z: -17.41}
+  m_LocalPosition: {x: -32, y: 0, z: -16.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -20555,7 +20555,7 @@ Transform:
   m_GameObject: {fileID: 6281486093733420642}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.19, y: 0.93, z: -11.41}
+  m_LocalPosition: {x: -32, y: 0, z: -16.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -20601,7 +20601,7 @@ Transform:
   m_GameObject: {fileID: 6360857780531507560}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.19, y: 0.93, z: -15.41}
+  m_LocalPosition: {x: -32, y: 0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -20978,22 +20978,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attractMode: 0
   _perpSpawns:
-  - Position: {x: -30.453224, y: 0, z: 1.0593486}
+  - Position: {x: -35.923965, y: 0, z: 20.455603}
     Rotation: {x: 0, y: -0.8834664, z: 0, w: 0.46849442}
     SpawnPointName: Point 1
-  - Position: {x: -2.7482185, y: 0, z: -23.208805}
-    Rotation: {x: 0, y: 0.3305455, z: 0, w: -0.9437901}
+  - Position: {x: -23.636494, y: 0, z: -1.4501885}
+    Rotation: {x: 0.01368913, y: 0.33051074, z: 0.0047943722, w: -0.9436908}
     SpawnPointName: Point 2
-  - Position: {x: -41.484398, y: 0, z: -14.919706}
+  - Position: {x: -50.685184, y: 0, z: -15.665716}
     Rotation: {x: 0, y: -0.30813378, z: 0, w: -0.95134306}
     SpawnPointName: Point 3
   - Position: {x: 6.9546523, y: 0, z: 11.0576725}
     Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
     SpawnPointName: Point 4
+  - Position: {x: 6.9546523, y: 0, z: 11.0576725}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 5
+  - Position: {x: -13.1603775, y: 0, z: -59.107334}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 9
+  - Position: {x: 9.805601, y: 0, z: -31.231398}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 10
+  - Position: {x: -44.995975, y: 0, z: -38.200382}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 11
+  - Position: {x: -22.346771, y: 0, z: -74.94594}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 12
+  - Position: {x: -2.231741, y: 0, z: -62.9086}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 13
+  - Position: {x: -24.2474, y: 0, z: -7.156721}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 14
+  - Position: {x: -12.051673, y: 0, z: -16.818272}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 15
+  - Position: {x: -49.430782, y: 0, z: -66.70988}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 16
+  - Position: {x: 9.805603, y: 0, z: -42.635193}
+    Rotation: {x: 0, y: -0.9393634, z: 0, w: -0.34292337}
+    SpawnPointName: Point 17
+  - Position: {x: -35.81658, y: 0, z: -37.681633}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 18
+  - Position: {x: -7.5925417, y: 0, z: -35.816605}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 19
+  - Position: {x: -4.6085014, y: 0, z: -8.214247}
+    Rotation: {x: 0.3621894, y: -0.33327052, z: -0.058176182, w: -0.86854166}
+    SpawnPointName: Point 4
+  - Position: {x: 6.9546523, y: 0, z: 11.0576725}
+    Rotation: {x: 0, y: -0.3663759, z: 0, w: -0.93046695}
+    SpawnPointName: Point 4
   _perps:
-  - {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
   - {fileID: 11400000, guid: 21699c2538c684fb1bb49a0aa7076f83, type: 2}
-  - {fileID: 11400000, guid: f8d3a740672e94895a45284913e35b0d, type: 2}
+  - {fileID: 11400000, guid: a04390884c808487fbf673161f0281ff, type: 2}
+  - {fileID: 11400000, guid: 7017a20c9429940538ceb745afbd728b, type: 2}
+  - {fileID: 11400000, guid: b9ef6c8f0888a4bb8b0005ef0d7c0f38, type: 2}
+  - {fileID: 11400000, guid: 66e2c39e84cd4482b94ee8adaf6b7c39, type: 2}
+  - {fileID: 11400000, guid: 6ea0b235b05bc400b90590acf1dce7af, type: 2}
+  - {fileID: 11400000, guid: 8b93f8b58f4504b93ac3c8dc26cdc7e0, type: 2}
+  - {fileID: 11400000, guid: cd380a74ead1c4e389b48b86d881dc5c, type: 2}
+  - {fileID: 11400000, guid: 50c770a0b6fec4ac3b5e1b5cb37e6b92, type: 2}
+  - {fileID: 11400000, guid: b82be4f9cd8af46a5a225da62cdd6106, type: 2}
+  - {fileID: 11400000, guid: 372fdb98c6e36434bb95fa771d3fc725, type: 2}
 --- !u!1001 &5822796872539511158
 PrefabInstance:
   m_ObjectHideFlags: 0
