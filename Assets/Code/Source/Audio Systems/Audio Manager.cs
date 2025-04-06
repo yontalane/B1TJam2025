@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -135,11 +136,42 @@ namespace B1TJam2025
 
         #endregion
 
+        #region Delayed Play Functions
 
-        /// <summary>
-        /// Moves a audiosource to be aligned with a transform each frame until it's set inactive
-        /// </summary>
-        private IEnumerator TrackAudioSource(GameObject source, Transform trackedObj)
+        /// <summary> Run PlaySoundTracked with a delay </summary>
+        /// <param name="delay"> delay in seconds </param>
+        public void PlaySoundOnDelay(float delay, AudioClip clip, Vector3 position, Volume volume = Volume.Loud) => 
+            StartCoroutine(RunOnDelay(delay, () => { PlaySound(clip, position, volume); }));
+
+        /// <summary> Run PlaySoundTracked with a delay </summary>
+        /// <param name="delay"> delay in seconds </param>
+        public void PlaySoundOnDelay(float delay, AudioClip clip, Vector3 position, float volume) =>
+            StartCoroutine(RunOnDelay(delay, () => { PlaySound(clip, position, volume); }));
+
+        /// <summary> Run PlaySoundTracked with a delay </summary>
+        /// <param name="delay"> delay in seconds </param>
+        public void PlaySoundTrackedOnDelay(float delay, AudioClip clip, Transform objToTrack, Volume volume = Volume.Loud) =>
+            StartCoroutine(RunOnDelay(delay, () => { PlaySoundTracked(clip, objToTrack, volume); }));
+
+        /// <summary> Run PlaySoundTracked with a delay </summary>
+        /// <param name="delay"> delay in seconds </param>
+        public void PlaySoundTrackedOnDelay(float delay, AudioClip clip, Transform objToTrack, float volume) =>
+            StartCoroutine(RunOnDelay(delay, () => { PlaySoundTracked(clip, objToTrack, volume); }));
+
+        //runs a function on delay
+        private IEnumerator RunOnDelay(float delay, Action func)
+        {
+            yield return new WaitForSeconds(delay);
+            func?.Invoke();
+        }
+
+        #endregion
+
+
+    /// <summary>
+    /// Moves a audiosource to be aligned with a transform each frame until it's set inactive
+    /// </summary>
+    private IEnumerator TrackAudioSource(GameObject source, Transform trackedObj)
         {
             while (trackedObj != null && source.activeInHierarchy)
             {
