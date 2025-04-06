@@ -41,7 +41,7 @@ namespace B1TJam2025
 
     public enum PerpType
     {
-        Unassuming = 0,
+        Loitering = 0,
         Protester = 1,
         SittingOnGround = 2,
         Graffiti = 3,
@@ -196,6 +196,7 @@ namespace B1TJam2025
             if (m_firstPass)
             {
                 m_animator.SetInteger("PerpType", (int)m_settings.type);
+                Debug.Log($"Setting type of {name} to {m_settings.type}.");
                 m_firstPass = false;
             }
 
