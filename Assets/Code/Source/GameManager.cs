@@ -19,6 +19,7 @@ namespace B1TJam2025
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
         private readonly List<GameObject> m_tempFleeTargets = new();
+        private readonly List<Conversation> m_conversationQueue = new();
         private bool m_inRandomSegment;
         private int m_sequenceIndex;
         private int m_perpsToBeat;
@@ -222,8 +223,7 @@ namespace B1TJam2025
 
             if (perp.GameSequenceSegmentIndex == -1)
             {
-                Player.DialogCameraIsActive = true;
-                DialougeManager.InitiateConversation(perp.VictorySpeech);
+                m_conversationQueue.Add(perp.VictorySpeech);
                 return true;
             }
 
@@ -248,8 +248,7 @@ namespace B1TJam2025
                 }
             }
 
-            Player.DialogCameraIsActive = true;
-            DialougeManager.InitiateConversation(perp.VictorySpeech);
+            m_conversationQueue.Add(perp.VictorySpeech);
             return true;
         }
 
@@ -301,8 +300,7 @@ namespace B1TJam2025
 
             if (segment.beatBuddyAPB != null)
             {
-                Player.DialogCameraIsActive = true;
-                DialougeManager.InitiateConversation(segment.beatBuddyAPB);
+                s_instance.m_conversationQueue.Add(segment.beatBuddyAPB);
             }
         }
 
@@ -361,6 +359,13 @@ namespace B1TJam2025
 
         private void LateUpdate()
         {
+            if (m_conversationQueue.Count > 0 && !Player.DialogCameraIsActive)
+            {
+                Player.DialogCameraIsActive = true;
+                DialougeManager.InitiateConversation(m_conversationQueue[0]);
+                m_conversationQueue.RemoveAt(0);
+            }
+
             if (m_perpsToBeat <= 0)
             {
                 if (m_sequenceIndex < m_sequence.segments.Length)
