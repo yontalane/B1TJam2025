@@ -15,16 +15,16 @@ MonoBehaviour:
   _lines:
   - LineText: "Dude, this is literally where I live! \nMy mom's upstairs!"
     CharName: Sonny Boy
-    CharacterSprite: {fileID: 0}
+    CharacterSprite: {fileID: 21300000, guid: ad271b42a547e4a7191a7bf6d4d7af95, type: 3}
     FireEventOnClear: 0
     EventCode: 
   - LineText: Oh no... he knows we're high!
     CharName: Deeply Stoned
-    CharacterSprite: {fileID: 0}
+    CharacterSprite: {fileID: 21300000, guid: ad271b42a547e4a7191a7bf6d4d7af95, type: 3}
     FireEventOnClear: 0
     EventCode: 
   - LineText: "I'm just waiting for the bus! \nWhat is WRONG with this cop?!"
     CharName: Transit Fan
-    CharacterSprite: {fileID: 0}
+    CharacterSprite: {fileID: 21300000, guid: ad271b42a547e4a7191a7bf6d4d7af95, type: 3}
     FireEventOnClear: 0
     EventCode: 

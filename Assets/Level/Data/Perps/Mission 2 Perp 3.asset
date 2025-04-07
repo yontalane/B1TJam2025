@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 0
     behavior: 10
     hp: 3
-    alertRadius: 2.25
+    alertRadius: 0
     alertTimeBeforeAction: 4
     conversation: {fileID: 11400000, guid: f186a8f3ec94044a48fd2f3ff5125bab, type: 2}
     runAfterDialog: 0
