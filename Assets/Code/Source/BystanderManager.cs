@@ -7,7 +7,12 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Bystander Manager")]
     public sealed class BystanderManager : MonoBehaviour
     {
+        public delegate void BystanderManagerEventHandler(int newBystandersRemaining, int originalTotalBystanders);
+        public static BystanderManagerEventHandler OnBystanderKilled = null;
+
+
         private readonly List<GameObject> m_list = new();
+        private int m_bystandersCount;
 
 
         [SerializeField]
@@ -31,11 +36,13 @@ namespace B1TJam2025
         private void OnEnable()
         {
             GameManager.OnGameStart += OnGameStart;
+            Bystander.OnBystanderKilled += OnIndividualBystanderKilled;
         }
 
         private void OnDisable()
         {
             GameManager.OnGameStart -= OnGameStart;
+            Bystander.OnBystanderKilled -= OnIndividualBystanderKilled;
         }
 
 
@@ -53,6 +60,8 @@ namespace B1TJam2025
 
                 m_list.Add(gameObject);
             }
+
+            m_bystandersCount = m_spawnCount;
 
             for (int i = 0; i < m_spawnCount; i++)
             {
@@ -77,6 +86,13 @@ namespace B1TJam2025
 
                 bystander.Initialize(m_list);
             }
+        }
+
+
+        private void OnIndividualBystanderKilled(Bystander bystander)
+        {
+            m_bystandersCount--;
+            OnBystanderKilled?.Invoke(m_bystandersCount, m_spawnCount);
         }
     }
 }

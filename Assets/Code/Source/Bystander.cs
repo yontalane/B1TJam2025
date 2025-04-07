@@ -10,6 +10,10 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Bystander")]
     public class Bystander : MonoBehaviour, IHittable
     {
+        public delegate void BystanderEventHandler(Bystander bystander);
+        public static BystanderEventHandler OnBystanderKilled = null;
+
+
         private const float MIN_DISTANCE = 5f;
         private const float CLOSE_ENOUGH_TO_DESTINATION = 0.1f;
         private const float TIME_TO_REMAIN_AFTER_KO = 5f;
@@ -146,6 +150,8 @@ namespace B1TJam2025
             GetComponent<Collider>().enabled = false;
             m_navMeshAgent.isStopped = true;
             m_navMeshAgent.enabled = false;
+
+            OnBystanderKilled?.Invoke(this);
 
             StartCoroutine(Die());
         }
