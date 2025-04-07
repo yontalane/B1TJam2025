@@ -300,7 +300,7 @@ namespace B1TJam2025
                     SFXManager.Play("Step", transform.position, animationEvent.floatParameter);
                     break;
 
-                case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out Perp perp) && perp.State != PerpState.KO:
+                case "Hit" when m_club.IsEnabled && m_club.TryGetOverlapByType(out IHittable hittable) && !hittable.IsDead:
 
                     Camera.main.GetComponent<Shake>().Activate();
 
@@ -310,7 +310,7 @@ namespace B1TJam2025
                     //sfx
                     if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Flesh"))
                     {
-                        perp.GetHit();
+                        hittable.GetHit();
 
                         ParticleSystem effect = Instantiate(m_hitEffect);
                         effect.transform.position = m_club.Collider.bounds.center;

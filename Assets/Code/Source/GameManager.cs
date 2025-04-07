@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace B1TJam2025
 {
@@ -33,6 +34,9 @@ namespace B1TJam2025
         [Header("Scene References")]
 
         [SerializeField]
+        private GameObject m_loadingScreen;
+
+        [SerializeField]
         private GameObject m_footInstructions;
 
         [SerializeField]
@@ -62,6 +66,7 @@ namespace B1TJam2025
         {
             m_sequence = null;
 
+            m_loadingScreen = null;
             m_footInstructions = null;
             m_vehicleInstructions = null;
 
@@ -94,6 +99,7 @@ namespace B1TJam2025
         private void Awake()
         {
             s_instance = this;
+            m_loadingScreen.SetActive(true);
         }
 
         private void Start()
@@ -129,6 +135,14 @@ namespace B1TJam2025
 
             m_sequenceIndex = -1;
             AdvanceSequence();
+
+            StartCoroutine(DelayedRemoveLoadingScreen());
+        }
+
+        private IEnumerator DelayedRemoveLoadingScreen()
+        {
+            yield return new WaitForEndOfFrame();
+            m_loadingScreen.SetActive(false);
         }
 
 

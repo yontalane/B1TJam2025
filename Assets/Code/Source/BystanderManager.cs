@@ -28,14 +28,25 @@ namespace B1TJam2025
         private Bystander m_prefab;
 
 
-        private void Start()
+        private void OnEnable()
+        {
+            GameManager.OnGameStart += OnGameStart;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameStart -= OnGameStart;
+        }
+
+
+        private void OnGameStart()
         {
             m_spawnName = m_spawnName.ToLower();
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(m_spawnTag);
 
-            foreach(GameObject gameObject in gameObjects)
+            foreach (GameObject gameObject in gameObjects)
             {
-                if (!gameObject.name.Contains(m_spawnName))
+                if (!gameObject.name.ToLower().Contains(m_spawnName))
                 {
                     continue;
                 }
@@ -45,14 +56,17 @@ namespace B1TJam2025
 
             for (int i = 0; i < m_spawnCount; i++)
             {
-                GameObject location = gameObjects[Mathf.FloorToInt(gameObjects.Length * Random.value)];
+                GameObject location = m_list[Mathf.FloorToInt(m_list.Count * Random.value)];
+
                 Vector3 position = location.transform.position + new Vector3()
                 {
                     x = Random.Range(-m_maxOffset.x, m_maxOffset.x),
                     z = Random.Range(-m_maxOffset.y, m_maxOffset.y),
                 };
+
                 Bystander bystander = Instantiate(m_prefab);
-                bystander.transform.position = position;
+
+                bystander.Position = position;
                 bystander.transform.localEulerAngles = new()
                 {
                     x = 0f,
@@ -60,6 +74,8 @@ namespace B1TJam2025
                     z = 0f,
                 };
                 bystander.transform.localScale = Vector3.one;
+
+                bystander.Initialize(m_list);
             }
         }
     }

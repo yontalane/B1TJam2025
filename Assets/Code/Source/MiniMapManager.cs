@@ -14,6 +14,7 @@ namespace B1TJam2025
         }
 
 
+        private bool m_initialized;
         private MarkerAndTarget m_playerData;
         private readonly List<MarkerAndTarget> m_perpData = new();
 
@@ -50,6 +51,8 @@ namespace B1TJam2025
             };
 
             m_playerData = GenerateMarker(GameManager.Player.transform, m_playerMarker);
+
+            m_initialized = true;
         }
 
         private void OnPerpSpawn(Perp perp)
@@ -79,6 +82,11 @@ namespace B1TJam2025
 
         private void LateUpdate()
         {
+            if (!m_initialized)
+            {
+                return;
+            }
+
             PlaceMarker(m_playerData);
 
             for (int i = m_perpData.Count - 1; i >= 0; i--)

@@ -157,9 +157,9 @@ namespace B1TJam2025
                 return;
             }
 
-            if (collider.TryGetComponent(out Perp perp))
+            if (collider.TryGetComponent(out IHittable hittable))
             {
-                perp.GetKilled();
+                hittable.GetKilled();
             }
             else
             {
@@ -226,6 +226,11 @@ namespace B1TJam2025
             }
 
             if (LayerMask.LayerToName(collider.gameObject.layer) == "Surface")
+            {
+                return;
+            }
+
+            if (LayerMask.LayerToName(collider.gameObject.layer) == "SurfaceBlocked")
             {
                 return;
             }

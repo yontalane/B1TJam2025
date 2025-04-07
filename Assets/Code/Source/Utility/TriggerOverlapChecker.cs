@@ -70,7 +70,7 @@ namespace B1TJam2025.Utility
             OnOverlapExit?.Invoke(other);
         }
 
-        public bool TryGetOverlapByType<T>(out T overlap) where T : Component
+        public bool TryGetOverlapByType<T>(out T overlap)
         {
             for (int i = m_colliders.Count - 1; i >= 0; i--)
             {
@@ -86,11 +86,11 @@ namespace B1TJam2025.Utility
                 }
             }
 
-            overlap = null;
+            overlap = default;
             return false;
         }
 
-        public int GetOverlapsByType<T>(List<T> overlaps) where T : Component
+        public int GetOverlapsByType<T>(List<T> overlaps)
         {
             overlaps ??= new();
             overlaps.Clear();

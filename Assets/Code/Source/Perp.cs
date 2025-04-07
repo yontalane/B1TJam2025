@@ -57,7 +57,7 @@ namespace B1TJam2025
     [DisallowMultipleComponent]
     [RequireComponent(typeof(NavMeshAgent))]
     [AddComponentMenu("B1TJam2025/Perp")]
-    public class Perp : MonoBehaviour
+    public class Perp : MonoBehaviour, IHittable
     {
         public delegate void PerpEventHandler(Perp perp);
         public static PerpEventHandler OnPerpSpawn = null;
