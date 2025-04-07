@@ -3,7 +3,137 @@ guid: 8d496c564cec04483891ed198ee47306
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Awning
+    second: {fileID: 2100000, guid: c61bb3ed4361c4e48889497bc051e01a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BenchLegs
+    second: {fileID: 2100000, guid: e8885f058c363450e9f2ebbbefb6a7f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BenchSeat
+    second: {fileID: 2100000, guid: 68f29499fa70649a4b8b13a22a6a1404, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BillboardMain
+    second: {fileID: 2100000, guid: e58ce3baf5257437386e02003347ad61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConstructionBarrierLegs
+    second: {fileID: 2100000, guid: ac4b8fe9e1af04694b8a3e343d931bb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConstructionBarrierPainted
+    second: {fileID: 2100000, guid: d742ad500746b4823bea50bc6f746406, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConstructionBarrierPlain
+    second: {fileID: 2100000, guid: 79aa4f0f654944b26b0edcb1bd0514a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FireHydrant
+    second: {fileID: 2100000, guid: 3560793e6fc2145c7921e7ae338048ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FountainBase
+    second: {fileID: 2100000, guid: 633b064aee401497087c628eddf39f7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FountainWater
+    second: {fileID: 2100000, guid: 5f736ed482b54414a90af0db90a5192d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: JerseyBarrier
+    second: {fileID: 2100000, guid: 501c4156e1a094689b2df36ee6f30d19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mailbox
+    second: {fileID: 2100000, guid: dc09994c63add4c88adbdf1ce1c175c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Manhole
+    second: {fileID: 2100000, guid: 47ac9736dae004e8581c54b0ebae93f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SignCircle
+    second: {fileID: 2100000, guid: 5ca1c2ba57141403989c08812942e49e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SignPost
+    second: {fileID: 2100000, guid: afc1d9e79b9ab4262821a58c93101af6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SignStop
+    second: {fileID: 2100000, guid: 568636b73261846d7a05a9dd89177669, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SignTriangle
+    second: {fileID: 2100000, guid: 3279e18a2239b46c28bf8d708b1fb934, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StreetLightA
+    second: {fileID: 2100000, guid: c781d2fe64e104bd9aba320fce4e551d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StreetLightB
+    second: {fileID: 2100000, guid: b8168420ebe774bd19b152bb2f9deaf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StreetSign
+    second: {fileID: 2100000, guid: 505f875781b624cff807a6cf29b300eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrafficLight
+    second: {fileID: 2100000, guid: 46339b934dd1b418180d4a60ddab8300, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrafficLightGreen
+    second: {fileID: 2100000, guid: dc322d00c67e84292b8ef524f2ee3510, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrafficLightRed
+    second: {fileID: 2100000, guid: a28eaa7127dea4d439412589d97c2a9a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrafficLightYellow
+    second: {fileID: 2100000, guid: 60201f49e5b0d415996a332b2cac550f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeBark
+    second: {fileID: 2100000, guid: be02da2c6c93846fca319aac01a16264, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeLeaves
+    second: {fileID: 2100000, guid: 978ad51b1de2c4fae94c7c78a3a86ef9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +218,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.004
+    globalScale: 0.4
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
