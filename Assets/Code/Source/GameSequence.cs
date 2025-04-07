@@ -12,14 +12,16 @@ namespace B1TJam2025
 
         // Scripted
 
-        [Tooltip("Name of a GameObject in the city map that defines where the perp should spawn.")]
-        public string spawnTarget;
+        [Header("Settings for Scripted Only")]
 
-        [Tooltip("The perp to spawn.")]
-        public PerpWrapper perp;
+        [Tooltip("Name of GameObjects in the city map that defines where the perps should spawn.")]
+        public string[] spawnTargets;
 
-        [Tooltip("Does the player need to beat the perp in this sequence before we activate the next segment?")]
-        public bool beatBeforeContinuing;
+        [Tooltip("The perps to spawn.")]
+        public PerpWrapper[] perps;
+
+        //[Tooltip("Does the player need to beat the perp in this sequence before we activate the next segment?")]
+        //public bool beatBeforeContinuing;
 
         [Tooltip("Dialog with Beat Buddy announcing this crime.")]
         public Conversation beatBuddyAPB;
@@ -28,6 +30,8 @@ namespace B1TJam2025
         public Conversation victorySoliloquy;
 
         // Random
+
+        [Header("Settings for Random Only")]
 
         [Tooltip("How many randomly spawned perps does the player need to beat before proceeding to the next segment?")]
         public int randomCount;

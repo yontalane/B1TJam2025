@@ -19,6 +19,7 @@ namespace B1TJam2025
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
         private readonly List<GameObject> m_tempFleeTargets = new();
+        private readonly List<Conversation> m_conversationQueue = new();
         private bool m_inRandomSegment;
         private int m_sequenceIndex;
         private int m_perpsToBeat;
@@ -210,11 +211,45 @@ namespace B1TJam2025
                 SpawnRandomPerp();
             }
 
-            if (perp.VictorySpeech != null)
+            _ = TryPlayVictorySpeech(perp);
+        }
+
+        private bool TryPlayVictorySpeech(Perp perp)
+        {
+            if (perp == null || perp.VictorySpeech == null)
             {
-                Player.DialogCameraIsActive = true;
-                DialougeManager.InitiateConversation(perp.VictorySpeech);
+                return false;
             }
+
+            if (perp.GameSequenceSegmentIndex == -1)
+            {
+                m_conversationQueue.Add(perp.VictorySpeech);
+                return true;
+            }
+
+            // HACK. These should be stored somewhere.
+            Perp[] allPerps = FindObjectsByType<Perp>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
+            foreach(Perp otherPerp in allPerps)
+            {
+                if (otherPerp == perp)
+                {
+                    continue;
+                }
+
+                if (otherPerp.GameSequenceSegmentIndex != perp.GameSequenceSegmentIndex)
+                {
+                    continue;
+                }
+
+                if (!otherPerp.IsDead)
+                {
+                    return false;
+                }
+            }
+
+            m_conversationQueue.Add(perp.VictorySpeech);
+            return true;
         }
 
         private void OnDialogComplete()
@@ -254,7 +289,7 @@ namespace B1TJam2025
             if (segment.type == GameSequenceSegmentType.Scripted)
             {
                 m_inRandomSegment = false;
-                InitializeScriptedSegment(segment);
+                InitializeScriptedSegment(segment, m_sequenceIndex);
             }
             else
             {
@@ -265,51 +300,72 @@ namespace B1TJam2025
 
             if (segment.beatBuddyAPB != null)
             {
-                Player.DialogCameraIsActive = true;
-                DialougeManager.InitiateConversation(segment.beatBuddyAPB);
+                s_instance.m_conversationQueue.Add(segment.beatBuddyAPB);
             }
         }
 
-        private void InitializeScriptedSegment(GameSequenceSegment segment)
+        private void InitializeScriptedSegment(GameSequenceSegment segment, int index)
         {
-            GameObject spawnTarget = GameObject.Find(segment.spawnTarget);
-
-            if (spawnTarget == null || segment.perp == null)
+            if (segment.spawnTargets.Length != segment.perps.Length)
             {
-                Debug.LogError($"GameSequenceSegment is not set up properly.");
+                Debug.LogError($"Game sequence has {segment.spawnTargets.Length} spawn targets and {segment.perps.Length} perps. These numbers need to be the same.");
+                return;
+            }
+            else if (segment.spawnTargets.Length == 0)
+            {
+                Debug.LogError($"Game sequence has no perps assigned.");
                 return;
             }
 
-            GameObject instance = segment.perp.SpawnPerp();
-            instance.name = $"Perp at {spawnTarget.name}";
-
-            instance.transform.eulerAngles = spawnTarget.transform.eulerAngles;
-            instance.transform.localScale = Vector3.one;
-
-            if (instance.TryGetComponent(out NavMeshAgent navMeshAgent))
+            for (int i = 0; i < segment.perps.Length; i++)
             {
-                navMeshAgent.Warp(spawnTarget.transform.position);
+                GameObject spawnTarget = GameObject.Find(segment.spawnTargets[i]);
+
+                if (spawnTarget == null || segment.perps == null)
+                {
+                    Debug.LogError($"GameSequenceSegment is not set up properly.");
+                    return;
+                }
+
+                GameObject instance = segment.perps[i].SpawnPerp();
+                instance.name = $"Perp at {spawnTarget.name}";
+
+                instance.transform.eulerAngles = spawnTarget.transform.eulerAngles;
+                instance.transform.localScale = Vector3.one;
+
+                if (instance.TryGetComponent(out NavMeshAgent navMeshAgent))
+                {
+                    navMeshAgent.Warp(spawnTarget.transform.position);
+                }
+
+                if (instance.TryGetComponent(out Perp perp))
+                {
+                    perp.VictorySpeech = segment.victorySoliloquy;
+                    perp.IsRandom = false;
+                    perp.GameSequenceSegmentIndex = index;
+                }
+
+                m_perpsToBeat++;
+
+                Debug.Log($"Scripted perp spawned.");
             }
 
-            if (instance.TryGetComponent(out Perp perp))
-            {
-                perp.VictorySpeech = segment.victorySoliloquy;
-                perp.IsRandom = false;
-            }
-
-            m_perpsToBeat++;
-
-            Debug.Log($"Scripted perp spawned.");
-
-            if (!segment.beatBeforeContinuing)
-            {
-                AdvanceSequence();
-            }
+            //if (!segment.beatBeforeContinuing)
+            //{
+            //    AdvanceSequence();
+            //}
         }
 
 
         private void LateUpdate()
         {
+            if (m_conversationQueue.Count > 0 && !Player.DialogCameraIsActive)
+            {
+                Player.DialogCameraIsActive = true;
+                DialougeManager.InitiateConversation(m_conversationQueue[0]);
+                m_conversationQueue.RemoveAt(0);
+            }
+
             if (m_perpsToBeat <= 0)
             {
                 if (m_sequenceIndex < m_sequence.segments.Length)

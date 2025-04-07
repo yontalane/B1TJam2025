@@ -15,37 +15,28 @@ MonoBehaviour:
   escapeCountToLose: 2
   segments:
   - type: 0
-    spawnTarget: Mission 1 Perp
-    perp: {fileID: 11400000, guid: f8d3a740672e94895a45284913e35b0d, type: 2}
-    beatBeforeContinuing: 1
+    spawnTargets:
+    - Mission 1 Perp
+    perps:
+    - {fileID: 11400000, guid: f8d3a740672e94895a45284913e35b0d, type: 2}
     beatBuddyAPB: {fileID: 11400000, guid: e6b3e73e8eceb47f493ceea02c8cbbed, type: 2}
     victorySoliloquy: {fileID: 11400000, guid: 0364c68fdff1b407e8a7d3a2e4eb7153, type: 2}
-    randomCount: 3
+    randomCount: 0
   - type: 0
-    spawnTarget: Mission 2 Perp 1
-    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
-    beatBeforeContinuing: 0
+    spawnTargets:
+    - Mission 2 Perp 1
+    - Mission 2 Perp 2
+    - Mission 2 Perp 3
+    perps:
+    - {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
+    - {fileID: 11400000, guid: 18d889abe8112499c8d5fbc908dbba67, type: 2}
+    - {fileID: 11400000, guid: c7f6d1401d37c4f579a68225b588591c, type: 2}
     beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
     victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
-    randomCount: 3
-  - type: 0
-    spawnTarget: Mission 2 Perp 2
-    perp: {fileID: 11400000, guid: 18d889abe8112499c8d5fbc908dbba67, type: 2}
-    beatBeforeContinuing: 0
-    beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
-    victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
-    randomCount: 3
-  - type: 0
-    spawnTarget: Mission 2 Perp 3
-    perp: {fileID: 11400000, guid: c7f6d1401d37c4f579a68225b588591c, type: 2}
-    beatBeforeContinuing: 1
-    beatBuddyAPB: {fileID: 11400000, guid: 68292b2aca9b34221aec0045b7b222ca, type: 2}
-    victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
-    randomCount: 2
+    randomCount: 0
   - type: 1
-    spawnTarget: Scripted Perp C
-    perp: {fileID: 11400000, guid: c61810e17445d4ad98aa32cd54c7cee7, type: 2}
-    beatBeforeContinuing: 1
+    spawnTargets: []
+    perps: []
     beatBuddyAPB: {fileID: 0}
     victorySoliloquy: {fileID: 0}
     randomCount: 11

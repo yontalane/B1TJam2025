@@ -15,6 +15,6 @@ MonoBehaviour:
   _lines:
   - LineText: "I'm not trespassing, bro. \nI'm an urban explorer!"
     CharName: Geo Cash
-    CharacterSprite: {fileID: 0}
+    CharacterSprite: {fileID: 21300000, guid: ad271b42a547e4a7191a7bf6d4d7af95, type: 3}
     FireEventOnClear: 0
     EventCode: 

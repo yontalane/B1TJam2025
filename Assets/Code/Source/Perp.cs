@@ -119,6 +119,10 @@ namespace B1TJam2025
 
         public Conversation VictorySpeech { get; set; }
 
+        public int GameSequenceSegmentIndex { get; set; } = -1;
+
+        public bool IsDead => State == PerpState.KO;
+
         public PerpState State
         {
             get
@@ -176,6 +180,8 @@ namespace B1TJam2025
                         effect.transform.position = transform.position;
                         effect.transform.eulerAngles = transform.eulerAngles;
                         effect.transform.localScale = Vector3.one;
+
+                        m_animator.SetTrigger("KO");
                         break;
                 }
 
@@ -320,7 +326,6 @@ namespace B1TJam2025
                 SFXManager.Play("Grunt", transform.position, 1f);
                 transform.position += 0.1f * Vector3.up;
                 State = PerpState.KO;
-                m_animator.SetTrigger("KO");
                 OnPerpKO?.Invoke(this);
                 StartCoroutine(RunDeathSequence());
             }
