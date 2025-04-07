@@ -338,7 +338,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: 1
+  m_RendererIndex: 2
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -2481,6 +2481,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5086433786596988391, guid: 9ffddb591b86144cba44fcc50809365f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 05bedc76165af4a608edc596f5906ccf, type: 2}
     - target: {fileID: 5101327714056659562, guid: 9ffddb591b86144cba44fcc50809365f, type: 3}
       propertyPath: m_Layer
       value: 7

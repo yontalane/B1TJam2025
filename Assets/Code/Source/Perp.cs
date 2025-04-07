@@ -175,6 +175,7 @@ namespace B1TJam2025
 
                     case PerpState.KO:
                         m_navMeshAgent.enabled = false;
+                        GetComponent<Collider>().enabled = false;
 
                         ParticleSystem effect = Instantiate(m_koEffect);
                         effect.transform.position = transform.position;

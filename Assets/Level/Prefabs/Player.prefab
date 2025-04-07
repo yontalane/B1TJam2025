@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 7013769503241970837}
   - component: {fileID: 2310684299183515282}
   - component: {fileID: 7362688090503746963}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5047,7 +5047,7 @@ GameObject:
   - component: {fileID: 2898254645164458658}
   - component: {fileID: 1768060586354010473}
   - component: {fileID: 4284007170828807757}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Club (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5475,7 +5475,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: 1
+  m_RendererIndex: 2
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
