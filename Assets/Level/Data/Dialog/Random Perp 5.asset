@@ -17,7 +17,7 @@ MonoBehaviour:
 
       Man, we were playing chess in the
       park!'
-    CharName: Grandmaster
+    CharName: Grand Master
     CharacterSprite: {fileID: 21300000, guid: ad271b42a547e4a7191a7bf6d4d7af95, type: 3}
     FireEventOnClear: 0
     EventCode: 
