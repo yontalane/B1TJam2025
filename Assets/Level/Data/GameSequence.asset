@@ -37,6 +37,12 @@ MonoBehaviour:
   - type: 1
     spawnTargets: []
     perps: []
-    beatBuddyAPB: {fileID: 0}
-    victorySoliloquy: {fileID: 0}
-    randomCount: 11
+    beatBuddyAPB: {fileID: 11400000, guid: d8a3ed82b13cb4c41a96225efb68131f, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: 567781cabb6ee4c4f88471d79b7c7258, type: 2}
+    randomCount: 3
+  - type: 1
+    spawnTargets: []
+    perps: []
+    beatBuddyAPB: {fileID: 11400000, guid: a91f70ee5f2394c3aa463858e58e390d, type: 2}
+    victorySoliloquy: {fileID: 11400000, guid: 72a5d78188bae4f53a8eef34a11eaf93, type: 2}
+    randomCount: 8

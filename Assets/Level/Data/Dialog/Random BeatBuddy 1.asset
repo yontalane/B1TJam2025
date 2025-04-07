@@ -10,11 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0f6fa4176db5c2409fcefb45b3e069e, type: 3}
-  m_Name: Mission 1 Victory
+  m_Name: Random BeatBuddy 1
   m_EditorClassIdentifier: 
   _lines:
-  - LineText: "JUSTICE DELIVERED. \nNo paint; only blood."
+  - LineText: 'WARNING: Multiple crimes reported, location unknown.'
+    CharName: Beat Buddy
+    CharacterSprite: {fileID: 0}
+    FireEventOnClear: 0
+    EventCode: 
+  - LineText: Might need to "commandeer" a car or take the subway to get around faster...
     CharName: Beat Cop
-    CharacterSprite: {fileID: 21300000, guid: ff7034d5af8854fd79c5711a78168fa7, type: 3}
+    CharacterSprite: {fileID: 21300000, guid: 75394432ab7f44622a0b59a10a88d315, type: 3}
     FireEventOnClear: 0
     EventCode: 
