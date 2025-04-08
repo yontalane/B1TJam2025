@@ -208,6 +208,15 @@ namespace B1TJam2025
             if (perpObj.TryGetComponent(out Perp perp))
             {
                 perp.IsRandom = true;
+
+                if (m_sequenceIndex < m_sequence.segments.Length)
+                {
+                    GameSequenceSegment segment = m_sequence.segments[m_sequenceIndex];
+                    if (segment.randomVictorySoliloquys != null && segment.randomVictorySoliloquys.Length > 0)
+                    {
+                        perp.VictorySpeech = segment.randomVictorySoliloquys[Mathf.FloorToInt(segment.randomVictorySoliloquys.Length * Random.value)];
+                    }
+                }
             }
         }
 
