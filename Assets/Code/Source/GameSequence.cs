@@ -5,10 +5,15 @@ namespace B1TJam2025
     [System.Serializable]
     public struct GameSequenceSegment
     {
-        // Type
+        // Common
+
+        [Header("Common")]
 
         [Tooltip("Is this segment of the game scripted or random?")]
         public GameSequenceSegmentType type;
+
+        [Tooltip("Dialog with Beat Buddy announcing this crime.")]
+        public Conversation beatBuddyAPB;
 
         // Scripted
 
@@ -23,9 +28,6 @@ namespace B1TJam2025
         //[Tooltip("Does the player need to beat the perp in this sequence before we activate the next segment?")]
         //public bool beatBeforeContinuing;
 
-        [Tooltip("Dialog with Beat Buddy announcing this crime.")]
-        public Conversation beatBuddyAPB;
-
         [Tooltip("Beat Cop's soliloquy after making the arrest.")]
         public Conversation victorySoliloquy;
 
@@ -35,6 +37,9 @@ namespace B1TJam2025
 
         [Tooltip("How many randomly spawned perps does the player need to beat before proceeding to the next segment?")]
         public int randomCount;
+
+        [Tooltip("Beat Cop's soliloquy after making the arrest.")]
+        public Conversation[] randomVictorySoliloquys;
     }
 
     public enum GameSequenceSegmentType

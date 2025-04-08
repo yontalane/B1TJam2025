@@ -17,16 +17,32 @@ namespace B1TJam2025
         private bool m_initialized;
         private MarkerAndTarget m_playerData;
         private readonly List<MarkerAndTarget> m_perpData = new();
+        private Vector2Int m_mapSize;
 
 
         [SerializeField]
         private RectTransform m_map;
 
         [SerializeField]
+        private RectTransform m_header;
+
+        [Space]
+
+        [SerializeField]
         private RectTransform m_playerMarker;
 
         [SerializeField]
         private RectTransform m_perpMarker;
+
+
+        private void Reset()
+        {
+            m_map = null;
+            m_header = null;
+
+            m_playerMarker = null;
+            m_perpMarker = null;
+        }
 
 
         private void OnEnable()
@@ -44,10 +60,22 @@ namespace B1TJam2025
 
         private void OnGameStart()
         {
+            m_mapSize = new()
+            {
+                x = Mathf.FloorToInt(GameManager.CityMap.Bounds.size.x),
+                y = Mathf.FloorToInt(GameManager.CityMap.Bounds.size.z),
+            };
+
             m_map.sizeDelta = new()
             {
-                x = GameManager.CityMap.Bounds.size.x,
-                y = GameManager.CityMap.Bounds.size.z,
+                x = m_mapSize.x,
+                y = m_mapSize.y,
+            };
+
+            m_header.sizeDelta = new()
+            {
+                x = m_mapSize.x,
+                y = m_header.sizeDelta.y,
             };
 
             m_playerData = GenerateMarker(GameManager.Player.transform, m_playerMarker);
@@ -112,9 +140,13 @@ namespace B1TJam2025
             float y = (t.position.z - b.min.z) / b.size.z;
 
             Vector2 size = m.sizeDelta;
-            m.anchorMin = new(x, y);
-            m.anchorMax = m.anchorMin;
-            m.offsetMin = Vector2.zero;
+            m.anchorMin = Vector2.zero;
+            m.anchorMax = Vector2.zero;
+            m.offsetMin = new()
+            {
+                x = Mathf.FloorToInt(m_mapSize.x * x),
+                y = Mathf.FloorToInt(m_mapSize.y * y),
+            };
             m.sizeDelta = size;
         }
     }

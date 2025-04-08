@@ -27,6 +27,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Sunglasses
+    second: {fileID: 2100000, guid: c2ae6ca378f1748458dc1f24ba89228c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: UniformBlackMatte
     second: {fileID: 2100000, guid: f562f6a1e968a4a56acc212478e85c63, type: 2}
   - first:
