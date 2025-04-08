@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _INCLUDEOUTLINE
   - _OUTLINETYPE_COLOR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -114,14 +113,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _INCLUDEOUTLINE: 1
+    - _INCLUDEOUTLINE: 0
     - _Metallic: 0
     - _NormalThreshold: 1
     - _OUTLINETYPE: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _PatternCells: 13
-    - _PixelScale: 1
+    - _PixelScale: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
