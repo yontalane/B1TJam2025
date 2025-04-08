@@ -331,9 +331,9 @@ namespace B1TJam2025
                 case "Hit" when m_club.IsEnabled && m_SFXSelectionSystem != null && !m_club.TryGetOverlapByType(out Perp _):
                     //for wall and air hit sfx
                     Collider[] cols = Physics.OverlapSphere(m_club.transform.position, 0.5f, LayerMask.GetMask("Wall"));
-                    if(cols.Length == 0)
+                    if (cols.Length == 0)
                     {
-                        if(m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Air"))
+                        if (m_SFXSelectionSystem.SetsByName.ContainsKey("Hit Air"))
                         {
                             //Air hit
                             AudioManager.Instance.PlaySound(
@@ -549,14 +549,14 @@ namespace B1TJam2025
                 return;
             }
 
-#if UNITY_EDITOR
             m_animator.SetInteger("Speed", inputValue.isPressed ? 1 : 0);
-#endif
         }
 
         public void OnCheatSprint(InputValue inputValue)
         {
+#if UNITY_EDITOR
             m_cheatSprint = inputValue.isPressed;
+#endif
         }
     }
 }
