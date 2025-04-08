@@ -517,6 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 211656794}
+  - component: {fileID: 211656795}
   m_Layer: 5
   m_Name: Instructions
   m_TagString: Untagged
@@ -545,6 +546,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!95 &211656795
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211656793}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 63d8f787ffd054d25b72ebcaf4764386, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &236421409
 GameObject:
   m_ObjectHideFlags: 0
@@ -4316,6 +4339,7 @@ MonoBehaviour:
   m_loadingScreen: {fileID: 658829908}
   m_footInstructions: {fileID: 1244200869}
   m_vehicleInstructions: {fileID: 791850025}
+  m_instructionsFTUX: {fileID: 211656795}
   m_playerPrefab: {fileID: -803528696439349148, guid: 4d74d2926c6f3438fad452926afbd4d7, type: 3}
   m_subwayStopPrefab: {fileID: 3576968436220719368, guid: c4c951304d6c042e6ab7ef665314390d, type: 3}
 --- !u!4 &1777027298

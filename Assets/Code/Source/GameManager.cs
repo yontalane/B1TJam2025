@@ -25,6 +25,7 @@ namespace B1TJam2025
         private int m_sequenceIndex;
         private int m_perpsToBeat;
         private static bool s_isPaused = false;
+        private static bool s_haveEverEnteredVehicle = false;
 
 
         [Header("Script")]
@@ -42,6 +43,9 @@ namespace B1TJam2025
 
         [SerializeField]
         private GameObject m_vehicleInstructions;
+
+        [SerializeField]
+        private Animator m_instructionsFTUX;
 
         [Header("Prefabs")]
 
@@ -80,6 +84,7 @@ namespace B1TJam2025
             m_loadingScreen = null;
             m_footInstructions = null;
             m_vehicleInstructions = null;
+            m_instructionsFTUX = null;
 
             m_playerPrefab = null;
             m_subwayStopPrefab = null;
@@ -94,6 +99,7 @@ namespace B1TJam2025
             Vehicle.OnVehicleEntered += OnVehicleEntered;
             Vehicle.OnVehicleExited += OnVehicleExited;
             DialougeManager.OnDialougeComplete += OnDialogComplete;
+            DialougeManager.OnConversationComplete += OnConversationComplete;
         }
 
         private void OnDisable()
@@ -104,6 +110,7 @@ namespace B1TJam2025
             Vehicle.OnVehicleEntered -= OnVehicleEntered;
             Vehicle.OnVehicleExited -= OnVehicleExited;
             DialougeManager.OnDialougeComplete -= OnDialogComplete;
+            DialougeManager.OnConversationComplete -= OnConversationComplete;
         }
 
 
@@ -285,10 +292,26 @@ namespace B1TJam2025
             }
         }
 
+        private void OnConversationComplete(string eventCode)
+        {
+            if (eventCode != "Initial")
+            {
+                return;
+            }
+
+            m_instructionsFTUX.SetTrigger("Notify");
+        }
+
         private void OnVehicleEntered(Vehicle _)
         {
             m_footInstructions.SetActive(false);
             m_vehicleInstructions.SetActive(true);
+
+            if (!s_haveEverEnteredVehicle)
+            {
+                s_haveEverEnteredVehicle = true;
+                m_instructionsFTUX.SetTrigger("Notify");
+            }
         }
 
         private void OnVehicleExited(Vehicle _)
