@@ -159,6 +159,12 @@ namespace B1TJam2025
 
         public void GetKilled()
         {
+            HittableHelper.OnHit?.Invoke(new()
+            {
+                hittable = this,
+                isKilled = true,
+            });
+
             ParticleSystem effect = Instantiate(m_koEffect);
             effect.transform.position = transform.position;
             effect.transform.eulerAngles = transform.eulerAngles;

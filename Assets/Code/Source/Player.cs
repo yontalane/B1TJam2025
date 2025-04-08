@@ -24,6 +24,7 @@ namespace B1TJam2025
         private Vehicle m_vehicle;
         private bool m_cheatSprint;
         private readonly List<Perp> m_perps = new();
+        private bool m_midBeat;
 
 
         [Header("Settings")]
@@ -166,13 +167,16 @@ namespace B1TJam2025
                 m_input = Vector3.zero;
             }
 
-            if (!m_ridingVehicle)
+            if (!m_midBeat || GetMovementInputExists())
             {
-                UpdateMovementOnFoot();
-            }
-            else
-            {
-                UpdateMovementInVehicle();
+                if (!m_ridingVehicle)
+                {
+                    UpdateMovementOnFoot();
+                }
+                else
+                {
+                    UpdateMovementInVehicle();
+                }
             }
 
             transform.position = new()
@@ -189,7 +193,7 @@ namespace B1TJam2025
 
             float speed = m_speed;
 
-            m_animator.SetBool("Run", movementInputExists);
+            m_animator.SetBool("Run", movementInputExists || m_midBeat);
 
             if (movementInputExists)
             {
@@ -202,13 +206,16 @@ namespace B1TJam2025
                     speed *= SPEED_REDUCTION_WHEN_WALKING;
                 }
 
-                Vector3 targetAngles = Quaternion.LookRotation(m_input.normalized, Vector3.up).eulerAngles;
-                transform.eulerAngles = new()
+                if (!m_midBeat)
                 {
-                    x = Mathf.SmoothDampAngle(transform.eulerAngles.x, targetAngles.x, ref m_currentVelocity.x, m_rotationSpeed),
-                    y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngles.y, ref m_currentVelocity.y, m_rotationSpeed),
-                    z = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngles.z, ref m_currentVelocity.z, m_rotationSpeed),
-                };
+                    Vector3 targetAngles = Quaternion.LookRotation(m_input.normalized, Vector3.up).eulerAngles;
+                    transform.eulerAngles = new()
+                    {
+                        x = Mathf.SmoothDampAngle(transform.eulerAngles.x, targetAngles.x, ref m_currentVelocity.x, m_rotationSpeed),
+                        y = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngles.y, ref m_currentVelocity.y, m_rotationSpeed),
+                        z = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngles.z, ref m_currentVelocity.z, m_rotationSpeed),
+                    };
+                }
 
                 m_characterController.Move(speed * Time.deltaTime * m_input);
             }
@@ -289,6 +296,12 @@ namespace B1TJam2025
 
                 case "CanBeat":
                     m_canBeat = animationEvent.intParameter > 0;
+
+                    if (m_canBeat)
+                    {
+                        m_midBeat = false;
+                    }
+
                     break;
 
                 case "Club":
@@ -488,6 +501,11 @@ namespace B1TJam2025
 
         public void OnAttack(InputValue inputValue)
         {
+            if (m_midBeat)
+            {
+                return;
+            }
+
             if (GameManager.IsPaused)
             {
                 return;
@@ -508,6 +526,8 @@ namespace B1TJam2025
                 return;
             }
 
+            m_midBeat = true;
+
             RotateTowardClosest();
 
             SetRandomVariation();
@@ -516,6 +536,11 @@ namespace B1TJam2025
 
         public void OnInteract(InputValue inputValue)
         {
+            if (m_midBeat)
+            {
+                return;
+            }
+
             if (GameManager.IsPaused)
             {
                 return;

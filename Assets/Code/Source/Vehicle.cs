@@ -190,6 +190,11 @@ namespace B1TJam2025
             ResetSpeed();
             m_beingDriven = true;
 
+            if (TryGetComponent(out Animator animator))
+            {
+                animator.SetBool("Driving", true);
+            }
+
             OnVehicleEntered?.Invoke(this);
 
             //pallete change
@@ -206,6 +211,11 @@ namespace B1TJam2025
             m_collider.enabled = true;
             m_collider.isTrigger = true;
             m_beingDriven = false;
+
+            if (TryGetComponent(out Animator animator))
+            {
+                animator.SetBool("Driving", false);
+            }
 
             OnVehicleExited?.Invoke(this);
 

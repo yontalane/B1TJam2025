@@ -323,6 +323,12 @@ namespace B1TJam2025
 
             m_settings.hp -= damage;
 
+            HittableHelper.OnHit?.Invoke(new()
+            {
+                hittable = this,
+                isKilled = m_settings.hp > 0,
+            });
+
             if (m_settings.hp > 0)
             {
                 SFXManager.Play("Grunt", transform.position, 0.333f);

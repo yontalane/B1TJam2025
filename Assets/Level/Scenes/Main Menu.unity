@@ -1997,8 +1997,8 @@ RectTransform:
   m_GameObject: {fileID: 540647482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.2, y: 0.9, z: 1.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 349494553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2210,7 +2210,7 @@ MonoBehaviour:
 
     David Frankel
 
-    Max Liberman
+    Max Lieberman
 
     Vivian Overbey'
   m_isRightToLeft: 0
