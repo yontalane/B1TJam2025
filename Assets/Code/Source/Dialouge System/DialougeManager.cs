@@ -9,6 +9,8 @@ namespace B1TJam2025
     {
         public delegate void DialougeEventHandler();
         public static DialougeEventHandler OnDialougeComplete = null;
+        public delegate void ConversationEventHandler(string eventCode);
+        public static ConversationEventHandler OnConversationComplete = null;
 
 
         [Header("Settings")]
@@ -89,12 +91,12 @@ namespace B1TJam2025
             WaitForEndOfFrame frameDelay = new();
             _dialougeBox.SetActive(true);
 
-            for(int i = 0; i < c.Lines.Count; i++)
+            for (int i = 0; i < c.Lines.Count; i++)
             {
                 _writer.WriteText(c.Lines[i]);
 
                 //while writing out
-                while(_writer.WritingState == DialougeWriter.State.Writing)
+                while (_writer.WritingState == DialougeWriter.State.Writing)
                 {
                     if (_input)
                     {
@@ -108,12 +110,16 @@ namespace B1TJam2025
                 while (_writer.WritingState == DialougeWriter.State.Complete)
                 {
                     // clears text, triggers event. 
-                    if (_input) 
+                    if (_input)
                     {
                         _writer.ClearText();
 
                         //event trigger
-                        if (c.Lines[i].FireEventOnClear) onTextClear?.Invoke(c.Lines[i].EventCode);
+                        if (c.Lines[i].FireEventOnClear)
+                        {
+                            onTextClear?.Invoke(c.Lines[i].EventCode);
+                            OnConversationComplete?.Invoke(c.Lines[i].EventCode);
+                        }
 
                         _input = false;
                         break;

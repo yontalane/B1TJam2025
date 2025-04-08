@@ -1336,6 +1336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneNum: 1
+  _quitButton: {fileID: 1748227714}
 --- !u!1 &345613132
 GameObject:
   m_ObjectHideFlags: 0

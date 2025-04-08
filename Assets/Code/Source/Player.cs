@@ -503,11 +503,6 @@ namespace B1TJam2025
                 return;
             }
 
-            if (TryInteract())
-            {
-                return;
-            }
-
             if (TryExitVehicle())
             {
                 return;
@@ -519,6 +514,34 @@ namespace B1TJam2025
             m_animator.SetTrigger("Beat");
         }
 
+        public void OnInteract(InputValue inputValue)
+        {
+            if (GameManager.IsPaused)
+            {
+                return;
+            }
+
+            if (!m_canBeat)
+            {
+                return;
+            }
+
+            if (!inputValue.isPressed)
+            {
+                return;
+            }
+
+            if (TryInteract())
+            {
+                return;
+            }
+
+            if (TryExitVehicle())
+            {
+                return;
+            }
+        }
+
         public void OnSprint(InputValue inputValue)
         {
             if (GameManager.IsPaused)
@@ -526,7 +549,9 @@ namespace B1TJam2025
                 return;
             }
 
+#if UNITY_EDITOR
             m_animator.SetInteger("Speed", inputValue.isPressed ? 1 : 0);
+#endif
         }
 
         public void OnCheatSprint(InputValue inputValue)

@@ -10,6 +10,10 @@ namespace B1TJam2025
     [AddComponentMenu("B1TJam2025/Bystander")]
     public class Bystander : MonoBehaviour, IHittable
     {
+        public delegate void BystanderEventHandler(Bystander bystander);
+        public static BystanderEventHandler OnBystanderKilled = null;
+
+
         private const float MIN_DISTANCE = 5f;
         private const float CLOSE_ENOUGH_TO_DESTINATION = 0.1f;
         private const float TIME_TO_REMAIN_AFTER_KO = 5f;
@@ -73,6 +77,11 @@ namespace B1TJam2025
                     continue;
                 }
 
+                if (!m_navMeshAgent.isOnNavMesh)
+                {
+                    continue;
+                }
+
                 if (!m_navMeshAgent.CalculatePath(m_pointB, path))
                 {
                     continue;
@@ -87,7 +96,21 @@ namespace B1TJam2025
             }
 
             m_comingFromA = true;
-            m_navMeshAgent.SetDestination(m_pointB);
+            if (m_navMeshAgent.isOnNavMesh)
+            {
+                m_navMeshAgent.SetDestination(m_pointB);
+            }
+        }
+
+
+        public void ToggleMovement(bool movementOn)
+        {
+            if (m_navMeshAgent.hasPath && m_navMeshAgent.isActiveAndEnabled && m_navMeshAgent.isOnNavMesh)
+            {
+                m_navMeshAgent.isStopped = !movementOn;
+            }
+
+            GetComponentInChildren<Animator>().enabled = movementOn;
         }
 
 
@@ -146,6 +169,8 @@ namespace B1TJam2025
             GetComponent<Collider>().enabled = false;
             m_navMeshAgent.isStopped = true;
             m_navMeshAgent.enabled = false;
+
+            OnBystanderKilled?.Invoke(this);
 
             StartCoroutine(Die());
         }

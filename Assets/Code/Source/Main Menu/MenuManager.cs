@@ -21,6 +21,19 @@ namespace B1TJam2025.MainMenu
         [Tooltip("The build's scene number for the main game scene")]
         private int _gameSceneNum;
 
+        [Header("References")]
+        [SerializeField]
+        [Tooltip("Quit button. Hide this on web builds.")]
+        private Button _quitButton;
+
+        private void Start()
+        {
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                _quitButton.gameObject.SetActive(false);
+            }
+        }
+
         /// <summary>
         /// Sets what pannel to fade, is used in InitiateFadeTransition
         /// </summary>
