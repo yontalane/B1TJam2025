@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace B1TJam2025
 {
@@ -15,7 +16,7 @@ namespace B1TJam2025
 
 
         private const string PERP_FLEE_TARGET_TAG = "PerpFleeTarget";
-
+        private const int ENDSCREEN_NUMBER = 2;
 
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
@@ -388,7 +389,17 @@ namespace B1TJam2025
                 }
                 else
                 {
-                    Debug.Log($"<b>YOU WIN</b>");
+                    ScoringSystem system = (ScoringSystem)FindAnyObjectByType(typeof(ScoringSystem));
+                    if (system != null) EndscreenScoreDisplay.EndGameScore = system.Score;
+                    else
+                    {
+                        Debug.LogWarning("Couldn't find scoring system in scene");
+                        EndscreenScoreDisplay.EndGameScore = 0;
+                    }
+
+
+                    SceneManager.LoadScene(ENDSCREEN_NUMBER);
+                    //Debug.Log($"<b>YOU WIN</b>");
                 }
             }
         }
