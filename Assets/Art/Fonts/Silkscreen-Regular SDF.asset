@@ -235,7 +235,11 @@ MonoBehaviour:
     m_Height: 1023
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
-    m_LigatureSubstitutionRecords: []
+    m_LigatureSubstitutionRecords:
+    - m_ComponentGlyphIDs: 7d0000009c00000080000000
+      m_LigatureGlyphID: 138
+    - m_ComponentGlyphIDs: 7d0000009c0000007e000000
+      m_LigatureGlyphID: 137
     m_GlyphPairAdjustmentRecords: []
     m_MarkToBaseAdjustmentRecords:
     - m_BaseGlyphID: 1
@@ -1519,6 +1523,62 @@ MonoBehaviour:
         m_XPositionAdjustment: 36
         m_YPositionAdjustment: 96
     - m_BaseGlyphID: 74
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 0
+      m_MarkGlyphID: 219
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 36.96
+        m_YPositionAdjustment: 0
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 213
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 30.048
+        m_YPositionAdjustment: 72
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 214
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 24
+        m_YPositionAdjustment: 60
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 215
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 24
+        m_YPositionAdjustment: 60
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 216
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 30.048
+        m_YPositionAdjustment: 60
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 217
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 36
+        m_YPositionAdjustment: 60
+    - m_BaseGlyphID: 79
+      m_BaseGlyphAnchorPoint:
+        m_XCoordinate: 30.048
+        m_YCoordinate: 96
+      m_MarkGlyphID: 218
+      m_MarkPositionAdjustment:
+        m_XPositionAdjustment: 36
+        m_YPositionAdjustment: 96
+    - m_BaseGlyphID: 79
       m_BaseGlyphAnchorPoint:
         m_XCoordinate: 30.048
         m_YCoordinate: 0

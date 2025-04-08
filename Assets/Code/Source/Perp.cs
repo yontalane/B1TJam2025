@@ -62,6 +62,8 @@ namespace B1TJam2025
         public delegate void PerpEventHandler(Perp perp);
         public static PerpEventHandler OnPerpSpawn = null;
         public static PerpEventHandler OnPerpKO = null;
+        public static PerpEventHandler OnPerpStartEscaping = null;
+        public static PerpEventHandler OnPerpEscapePrevented = null;
         public static PerpEventHandler OnPerpEscape = null;
 
 
@@ -74,6 +76,10 @@ namespace B1TJam2025
         private bool m_playerWasInAlertZone;
         private PerpState m_state;
         private float m_alertStartTime;
+        private bool m_calculatedPathLength;
+        private float m_fleeingPathStartingLength;
+        private float m_fleeingDistanceCovered;
+        private Vector3 m_previousPosition;
 
 
         [Header("Settings")]
@@ -125,6 +131,38 @@ namespace B1TJam2025
         public int GameSequenceSegmentIndex { get; set; } = -1;
 
         public bool IsDead => State == PerpState.KO;
+
+        public float ClosenessToEscape
+        {
+            get
+            {
+                if (State != PerpState.Run)
+                {
+                    return 0f;
+                }
+
+                if (m_navMeshAgent == null)
+                {
+                    return 0f;
+                }
+
+                if (!m_navMeshAgent.isOnNavMesh)
+                {
+                    return 0f;
+                }
+
+                if (!m_navMeshAgent.hasPath)
+                {
+                    return 0f;
+                }
+
+                float result = Mathf.Clamp01(m_fleeingDistanceCovered / m_fleeingPathStartingLength);
+
+                Debug.Log($"{m_fleeingDistanceCovered} / {m_fleeingPathStartingLength} = {result}");
+
+                return result;
+            }
+        }
 
         public PerpState State
         {
@@ -288,6 +326,20 @@ namespace B1TJam2025
 
             m_playerWasInAlertZone = playerIsInAlertZone;
 
+            if (State == PerpState.Run)
+            {
+                if (!m_calculatedPathLength)
+                {
+                    m_fleeingPathStartingLength = GetLengthOfPath(transform.position, m_navMeshAgent.path.corners);
+                    m_calculatedPathLength = m_fleeingPathStartingLength > 0f;
+                }
+
+                Vector3 currentPosition = transform.position;
+                float delta = Vector3.Distance(currentPosition, m_previousPosition);
+                m_fleeingDistanceCovered += delta;
+                m_previousPosition = currentPosition;
+            }
+
             if (State == PerpState.Run && Mathf.Approximately(Vector3.Distance(transform.position, m_navMeshAgent.destination), 0f))
             {
                 OnPerpEscape?.Invoke(this);
@@ -332,6 +384,12 @@ namespace B1TJam2025
             if (m_settings.hp > 0)
             {
                 SFXManager.Play("Grunt", transform.position, 0.333f);
+
+                if (State == PerpState.Run)
+                {
+                    OnPerpEscapePrevented?.Invoke(this);
+                }
+
                 State = PerpState.Cower;
                 m_navMeshAgent.isStopped = true;
                 m_animator.SetInteger("Variance", Random.Range(0, 2));
@@ -370,6 +428,11 @@ namespace B1TJam2025
 
             m_animator.SetBool("Run", true);
             m_navMeshAgent.SetDestination(target.position);
+            m_fleeingDistanceCovered = 0f;
+            m_calculatedPathLength = false;
+            m_previousPosition = transform.position;
+
+            OnPerpStartEscaping?.Invoke(this);
         }
 
 
@@ -385,6 +448,29 @@ namespace B1TJam2025
             m_dialogCamera.gameObject.SetActive(false);
             GameManager.IsPaused = false;
             RendererManager.ResetColors();
+        }
+
+
+        private static float GetLengthOfPath(Vector3 startPosition, Vector3[] path)
+        {
+            if (path == null || path.Length == 0)
+            {
+                return 0f;
+            }
+
+            float result = Vector3.Distance(startPosition, path[0]);
+
+            if (path.Length == 1)
+            {
+                return result;
+            }
+
+            for (int i = 1; i < path.Length; i++)
+            {
+                result += Vector3.Distance(path[i - 1], path[i]);
+            }
+
+            return result;
         }
 
 
