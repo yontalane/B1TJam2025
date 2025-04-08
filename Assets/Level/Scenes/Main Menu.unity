@@ -452,6 +452,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 699207722}
+        m_TargetAssemblyTypeName: B1TJam2025.MainMenu.CreditsShuffler, B1TJam2025.MainMenu
+        m_MethodName: Refresh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 282827551}
         m_TargetAssemblyTypeName: B1TJam2025.MainMenu.MenuManager, B1TJam2025.MainMenu
         m_MethodName: SetFadeInPanel
@@ -2158,6 +2170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699207719}
   - component: {fileID: 699207721}
+  - component: {fileID: 699207722}
   - component: {fileID: 699207720}
   m_Layer: 5
   m_Name: Text (TMP)
@@ -2291,6 +2304,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699207718}
   m_CullTransparentMesh: 1
+--- !u!114 &699207722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699207718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9480856e7a54ddd8d97a269807dda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  credits:
+  - David Frankel
+  - Max Lieberman
+  - Vivian Overbey
 --- !u!1 &734862473
 GameObject:
   m_ObjectHideFlags: 0
@@ -5452,10 +5481,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Made or the 7 day long B1T Game Jam.
+  m_text: 'Made in one week for B1T Jam.
 
 
-    Theme - Beat'
+    Theme: "Beat"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a8b3733cd9a28b43b2f0a3946e82d16, type: 2}
   m_sharedMaterial: {fileID: -7851421569649366721, guid: 4a8b3733cd9a28b43b2f0a3946e82d16, type: 2}
