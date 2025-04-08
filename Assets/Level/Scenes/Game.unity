@@ -5056,6 +5056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sequence: {fileID: 11400000, guid: 75ce6217e25eb47578936991a7598585, type: 2}
+  m_camera: {fileID: 330585545}
   m_loadingScreen: {fileID: 658829908}
   m_footInstructions: {fileID: 1244200869}
   m_vehicleInstructions: {fileID: 791850025}

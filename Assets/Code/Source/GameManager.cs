@@ -19,6 +19,8 @@ namespace B1TJam2025
         private const int ENDSCREEN_NUMBER = 2;
         private const float END_DURATION = 1f;
         private const string MAIN_MENU_SCENE = "Main Menu";
+        private const float CAR_FOV = 85f;
+        private const float FOV_SMOOTH_TIME = 0.1f;
 
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
@@ -32,6 +34,9 @@ namespace B1TJam2025
         private float m_gameStartTime;
         private bool m_isEnding;
         private float m_endStartTime;
+        private float m_originalFov;
+        private float m_targetFov;
+        private float m_fovCurrentVelocity;
 
 
         [Header("Script")]
@@ -40,6 +45,9 @@ namespace B1TJam2025
         private GameSequence m_sequence;
 
         [Header("Scene References")]
+
+        [SerializeField]
+        private Camera m_camera;
 
         [SerializeField]
         private GameObject m_loadingScreen;
@@ -93,10 +101,13 @@ namespace B1TJam2025
         {
             m_sequence = null;
 
+            m_camera = Camera.main;
             m_loadingScreen = null;
             m_footInstructions = null;
             m_vehicleInstructions = null;
             m_instructionsFTUX = null;
+            m_barnDoorL = null;
+            m_barnDoorR = null;
 
             m_playerPrefab = null;
             m_subwayStopPrefab = null;
@@ -134,6 +145,25 @@ namespace B1TJam2025
 
         private void Start()
         {
+            // Clean up previous session.
+            TotalBeats = 0;
+            TotalEscapes = 0;
+            IsPaused = false;
+            s_haveEverEnteredVehicle = false;
+            EndscreenScoreDisplay.PerpsBeaten = 0;
+            EndscreenScoreDisplay.PerpsEscaped = 0;
+            EndscreenScoreDisplay.GameTime = 0f;
+            EndscreenScoreDisplay.EndGameScore = 0;
+
+
+
+
+            m_originalFov = m_camera.fieldOfView;
+            m_targetFov = m_originalFov;
+
+
+
+
             m_gameStartTime = Time.time;
 
 
@@ -336,6 +366,8 @@ namespace B1TJam2025
             m_footInstructions.SetActive(false);
             m_vehicleInstructions.SetActive(true);
 
+            m_targetFov = CAR_FOV;
+
             if (!s_haveEverEnteredVehicle)
             {
                 s_haveEverEnteredVehicle = true;
@@ -347,6 +379,8 @@ namespace B1TJam2025
         {
             m_footInstructions.SetActive(true);
             m_vehicleInstructions.SetActive(false);
+
+            m_targetFov = m_originalFov;
         }
 
 
@@ -460,6 +494,8 @@ namespace B1TJam2025
                     StartEnding();
                 }
             }
+
+            m_camera.fieldOfView = Mathf.SmoothDamp(m_camera.fieldOfView, m_targetFov, ref m_fovCurrentVelocity, FOV_SMOOTH_TIME);
         }
 
         private void StartEnding()
