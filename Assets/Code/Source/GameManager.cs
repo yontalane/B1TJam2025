@@ -17,6 +17,8 @@ namespace B1TJam2025
 
         private const string PERP_FLEE_TARGET_TAG = "PerpFleeTarget";
         private const int ENDSCREEN_NUMBER = 2;
+        private const float END_DURATION = 1f;
+        private const string MAIN_MENU_SCENE = "Main Menu";
 
         private static GameManager s_instance;
         private readonly List<GameObject> m_fleeTargets = new();
@@ -27,6 +29,9 @@ namespace B1TJam2025
         private int m_perpsToBeat;
         private static bool s_isPaused = false;
         private static bool s_haveEverEnteredVehicle = false;
+        private float m_gameStartTime;
+        private bool m_isEnding;
+        private float m_endStartTime;
 
 
         [Header("Script")]
@@ -47,6 +52,12 @@ namespace B1TJam2025
 
         [SerializeField]
         private Animator m_instructionsFTUX;
+
+        [SerializeField]
+        private RectTransform m_barnDoorL;
+
+        [SerializeField]
+        private RectTransform m_barnDoorR;
 
         [Header("Prefabs")]
 
@@ -123,6 +134,9 @@ namespace B1TJam2025
 
         private void Start()
         {
+            m_gameStartTime = Time.time;
+
+
             MapObject[] mapObjects = FindObjectsByType<MapObject>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
             foreach (MapObject mapObject in mapObjects)
@@ -232,7 +246,7 @@ namespace B1TJam2025
 
             if (TotalEscapes >= m_sequence.escapeCountToLose)
             {
-                Debug.Log($"<b>YOU LOSE</b>");
+                StartEnding();
                 return;
             }
 
@@ -251,6 +265,11 @@ namespace B1TJam2025
             if (m_inRandomSegment && m_perpsToBeat > 0)
             {
                 SpawnRandomPerp();
+            }
+
+            if (m_perpsToBeat <= 0 && m_sequenceIndex >= m_sequence.segments.Length - 1)
+            {
+                return;
             }
 
             _ = TryPlayVictorySpeech(perp);
@@ -417,6 +436,12 @@ namespace B1TJam2025
 
         private void LateUpdate()
         {
+            if (m_isEnding)
+            {
+                UpdateEnding();
+                return;
+            }
+
             if (m_conversationQueue.Count > 0 && !Player.DialogCameraIsActive)
             {
                 Player.DialogCameraIsActive = true;
@@ -432,19 +457,87 @@ namespace B1TJam2025
                 }
                 else
                 {
-                    ScoringSystem system = (ScoringSystem)FindAnyObjectByType(typeof(ScoringSystem));
-                    if (system != null) EndscreenScoreDisplay.EndGameScore = system.Score;
-                    else
-                    {
-                        Debug.LogWarning("Couldn't find scoring system in scene");
-                        EndscreenScoreDisplay.EndGameScore = 0;
-                    }
-
-
-                    SceneManager.LoadScene(ENDSCREEN_NUMBER);
-                    //Debug.Log($"<b>YOU WIN</b>");
+                    StartEnding();
                 }
             }
+        }
+
+        private void StartEnding()
+        {
+            IsPaused = true;
+            m_isEnding = true;
+            m_endStartTime = Time.unscaledTime;
+        }
+
+        private void UpdateEnding()
+        {
+            m_barnDoorL.gameObject.SetActive(true);
+            m_barnDoorR.gameObject.SetActive(true);
+
+            float t = (Time.unscaledTime - m_endStartTime) / END_DURATION;
+
+            if (t <= 1f)
+            {
+                UpdateBarnDoorsPosition(t);
+                return;
+            }
+
+            if (TotalEscapes >= m_sequence.escapeCountToLose)
+            {
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(MAIN_MENU_SCENE);
+            }
+            else
+            {
+                Time.timeScale = 1f;
+
+                ScoringSystem system = (ScoringSystem)FindAnyObjectByType(typeof(ScoringSystem));
+                if (system != null)
+                {
+                    EndscreenScoreDisplay.EndGameScore = system.Score;
+                    EndscreenScoreDisplay.PerpsBeaten = TotalBeats;
+                    EndscreenScoreDisplay.PerpsEscaped = TotalEscapes;
+                    EndscreenScoreDisplay.GameTime = Time.time - m_gameStartTime;
+                }
+                else
+                {
+                    Debug.LogWarning("Couldn't find scoring system in scene");
+                    EndscreenScoreDisplay.EndGameScore = 0;
+                }
+
+                SceneManager.LoadScene(ENDSCREEN_NUMBER);
+            }
+        }
+
+        private void UpdateBarnDoorsPosition(float t)
+        {
+            Vector2 s = m_barnDoorL.sizeDelta;
+            m_barnDoorL.anchorMin = new()
+            {
+                x = Mathf.Lerp(-0.5f, 0f, t),
+                y = 0f,
+            };
+            m_barnDoorL.anchorMax = new()
+            {
+                x = Mathf.Lerp(0f, 0.5f, t),
+                y = 1f,
+            };
+            m_barnDoorL.anchoredPosition = Vector2.zero;
+            m_barnDoorL.sizeDelta = s;
+
+            s = m_barnDoorR.sizeDelta;
+            m_barnDoorR.anchorMin = new()
+            {
+                x = Mathf.Lerp(1f, 0.5f, t),
+                y = 0f,
+            };
+            m_barnDoorR.anchorMax = new()
+            {
+                x = Mathf.Lerp(1.5f, 1f, t),
+                y = 1f,
+            };
+            m_barnDoorR.anchoredPosition = Vector2.zero;
+            m_barnDoorR.sizeDelta = s;
         }
     }
 }

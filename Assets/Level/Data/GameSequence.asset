@@ -36,26 +36,3 @@ MonoBehaviour:
     victorySoliloquy: {fileID: 11400000, guid: b2523b617788541398717d3394dd5cc6, type: 2}
     randomCount: 0
     randomVictorySoliloquys: []
-  - type: 1
-    beatBuddyAPB: {fileID: 11400000, guid: d8a3ed82b13cb4c41a96225efb68131f, type: 2}
-    spawnTargets: []
-    perps: []
-    victorySoliloquy: {fileID: 11400000, guid: 567781cabb6ee4c4f88471d79b7c7258, type: 2}
-    randomCount: 3
-    randomVictorySoliloquys:
-    - {fileID: 11400000, guid: 567781cabb6ee4c4f88471d79b7c7258, type: 2}
-    - {fileID: 11400000, guid: 167efbe2712a84cb8af97e08f3c74820, type: 2}
-    - {fileID: 11400000, guid: 3496c07b79ef141c68093541294df9f5, type: 2}
-  - type: 1
-    beatBuddyAPB: {fileID: 11400000, guid: a91f70ee5f2394c3aa463858e58e390d, type: 2}
-    spawnTargets: []
-    perps: []
-    victorySoliloquy: {fileID: 11400000, guid: 72a5d78188bae4f53a8eef34a11eaf93, type: 2}
-    randomCount: 8
-    randomVictorySoliloquys:
-    - {fileID: 11400000, guid: 72a5d78188bae4f53a8eef34a11eaf93, type: 2}
-    - {fileID: 11400000, guid: e96db7c5a6a6d4db386f96847e6cf592, type: 2}
-    - {fileID: 11400000, guid: 35ac54970786546789b8497af9152061, type: 2}
-    - {fileID: 11400000, guid: 61a655294d0504673adf374ac9b99809, type: 2}
-    - {fileID: 11400000, guid: 73d6e93a13f0a41fca3d874a95878a95, type: 2}
-    - {fileID: 11400000, guid: c28c413672b2348c89580da4c907db7a, type: 2}
