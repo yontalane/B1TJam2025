@@ -966,7 +966,7 @@ MonoBehaviour:
   - name: Quit
     colorA: {r: 0.015686275, g: 0.09019608, b: 0.23529412, a: 0}
     colorB: {r: 0.78113204, g: 0.6175365, b: 0.63617396, a: 0}
-  m_renderer: {fileID: 11400000, guid: f288ae1f4751b564a96ac7587541f7a2, type: 2}
+  m_renderer: {fileID: 11400000, guid: 28e93d221213a4280950a7f1657c4ebd, type: 2}
 --- !u!4 &786907305
 Transform:
   m_ObjectHideFlags: 0

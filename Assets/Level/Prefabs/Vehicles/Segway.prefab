@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455717c3ba1c04258af9777079c69b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_palleteName: Segway
   m_topSpeed: 4
   m_acceleration: 0.5
   m_rotationSpeed: 0.75

@@ -844,7 +844,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -83.44}
-  m_SizeDelta: {x: 403.44, y: 0}
+  m_SizeDelta: {x: 379.07, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &297029302
 MonoBehaviour:
@@ -2221,7 +2221,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -20}
-  m_SizeDelta: {x: 352.08, y: 0}
+  m_SizeDelta: {x: 330.71, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &727579473
 MonoBehaviour:
@@ -2555,9 +2555,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1406716796548159417, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381515656668647300, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 3896938179831345571, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282506981567166178, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Segway
+      objectReference: {fileID: 0}
     - target: {fileID: 5468012281117300037, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
       propertyPath: m_Name
       value: City
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775888660670303049, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526289492777898521, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Bike
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324384477902798420, guid: 288b1ade79d2644ac926d9a79d06f8b9, type: 3}
+      propertyPath: m_palleteName
+      value: Car
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2598,7 +2626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253877518560769386, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 189.76
+      value: 177.9
       objectReference: {fileID: 0}
     - target: {fileID: 2253877518560769386, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2606,7 +2634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253877518560769386, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 104.88
+      value: 98.95
       objectReference: {fileID: 0}
     - target: {fileID: 2253877518560769386, guid: 9d14c042e15d3674990c96c4611ece74, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3048,7 +3076,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -210.32}
-  m_SizeDelta: {x: 361.44, y: 0}
+  m_SizeDelta: {x: 339.69, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1123018086
 MonoBehaviour:
@@ -4980,7 +5008,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -146.88}
-  m_SizeDelta: {x: 330.01, y: 0}
+  m_SizeDelta: {x: 309.38, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2001035944
 MonoBehaviour:
@@ -5131,6 +5159,15 @@ MonoBehaviour:
   - name: PerpHit
     colorA: {r: 0.24528301, g: 0.06579573, b: 0.051370595, a: 0}
     colorB: {r: 0.509434, g: 0.10418831, b: 0.07208964, a: 0}
+  - name: Bike
+    colorA: {r: 0.015686275, g: 0.09019608, b: 0.23529412, a: 0}
+    colorB: {r: 0.74818796, g: 0.8792453, b: 0.77098054, a: 0}
+  - name: Car
+    colorA: {r: 0.015686275, g: 0.09019608, b: 0.23529412, a: 0}
+    colorB: {r: 0.76745456, g: 0.76745456, b: 0.90188676, a: 0}
+  - name: Segway
+    colorA: {r: 0.015686275, g: 0.09019608, b: 0.23529412, a: 0}
+    colorB: {r: 0.8792453, g: 0.72828054, b: 0.8037629, a: 0}
   m_renderer: {fileID: 11400000, guid: 28e93d221213a4280950a7f1657c4ebd, type: 2}
 --- !u!4 &2011638775
 Transform:

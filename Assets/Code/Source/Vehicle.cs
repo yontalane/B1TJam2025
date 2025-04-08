@@ -1,3 +1,4 @@
+using System.Collections;
 using B1TJam2025.Utility;
 using UnityEngine;
 
@@ -26,6 +27,9 @@ namespace B1TJam2025
         private bool m_sliding;
         private float m_y;
 
+
+        [SerializeField]
+        private string m_palleteName;
 
         [SerializeField]
         [Min(0f)]
@@ -160,6 +164,9 @@ namespace B1TJam2025
             if (collider.TryGetComponent(out IHittable hittable))
             {
                 hittable.GetKilled();
+                Camera.main.GetComponent<Shake>().Activate();
+                StartCoroutine(ChangeColorTemporaryCar(0.2f, "PerpHit"));
+                SFXManager.Play("Grunt", transform.position, 1f);
             }
             else
             {
@@ -184,6 +191,9 @@ namespace B1TJam2025
             m_beingDriven = true;
 
             OnVehicleEntered?.Invoke(this);
+
+            //pallete change
+            RendererManager.SetColorsByName(m_palleteName);
         }
 
         public void StopRiding()
@@ -198,6 +208,9 @@ namespace B1TJam2025
             m_beingDriven = false;
 
             OnVehicleExited?.Invoke(this);
+
+            //pallete change
+            RendererManager.ResetColors();
         }
 
         private void ResetSpeed()
@@ -249,6 +262,14 @@ namespace B1TJam2025
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawSphere(OutsideSpot, 0.1f);
+        }
+
+        //copy of func from player
+        private IEnumerator ChangeColorTemporaryCar(float duration, string palleteName)
+        {
+            RendererManager.SetColorsByName(palleteName);
+            yield return new WaitForSeconds(duration);
+            RendererManager.SetColorsByName("Car");
         }
     }
 }
