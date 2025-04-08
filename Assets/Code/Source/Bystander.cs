@@ -77,6 +77,11 @@ namespace B1TJam2025
                     continue;
                 }
 
+                if (!m_navMeshAgent.isOnNavMesh)
+                {
+                    continue;
+                }
+
                 if (!m_navMeshAgent.CalculatePath(m_pointB, path))
                 {
                     continue;
@@ -91,7 +96,21 @@ namespace B1TJam2025
             }
 
             m_comingFromA = true;
-            m_navMeshAgent.SetDestination(m_pointB);
+            if (m_navMeshAgent.isOnNavMesh)
+            {
+                m_navMeshAgent.SetDestination(m_pointB);
+            }
+        }
+
+
+        public void ToggleMovement(bool movementOn)
+        {
+            if (m_navMeshAgent.hasPath && m_navMeshAgent.isActiveAndEnabled && m_navMeshAgent.isOnNavMesh)
+            {
+                m_navMeshAgent.isStopped = !movementOn;
+            }
+
+            GetComponentInChildren<Animator>().enabled = movementOn;
         }
 
 

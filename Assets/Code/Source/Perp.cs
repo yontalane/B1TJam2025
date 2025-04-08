@@ -109,6 +109,9 @@ namespace B1TJam2025
         [SerializeField]
         private AnimEventBroadcaster m_animEventBroadcaster;
 
+        [SerializeField]
+        private GameObject m_picketSign;
+
         [Header("Prefabs")]
 
         [SerializeField]
@@ -201,6 +204,8 @@ namespace B1TJam2025
             m_canvas = GetComponentInChildren<Canvas>();
             m_alert = GetComponentInChildren<TMP_Text>();
             m_dialogLocation = null;
+            m_animEventBroadcaster = GetComponentInChildren<AnimEventBroadcaster>();
+            m_picketSign = null;
 
             m_koEffect = null;
         }
@@ -297,6 +302,10 @@ namespace B1TJam2025
             {
                 case "Step":
                     SFXManager.Play("Step", transform.position, animationEvent.floatParameter);
+                    break;
+
+                case "Sign":
+                    m_picketSign.SetActive(animationEvent.intParameter > 0);
                     break;
             }
         }

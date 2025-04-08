@@ -24,6 +24,7 @@ namespace B1TJam2025
         private bool m_inRandomSegment;
         private int m_sequenceIndex;
         private int m_perpsToBeat;
+        private static bool s_isPaused = false;
 
 
         [Header("Script")]
@@ -51,7 +52,17 @@ namespace B1TJam2025
         private SubwayStop m_subwayStopPrefab;
 
 
-        public static bool IsPaused { get; set; }
+        public static bool IsPaused {
+            get
+            {
+                return s_isPaused;
+            }
+
+            set
+            {
+                s_isPaused = value;
+            }
+        }
 
         public static Player Player { get; private set; }
 

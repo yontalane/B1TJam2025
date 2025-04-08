@@ -11,7 +11,9 @@ namespace B1TJam2025
         public static BystanderManagerEventHandler OnBystanderKilled = null;
 
 
+        private static BystanderManager s_instance;
         private readonly List<GameObject> m_list = new();
+        private readonly List<Bystander> m_allBystanders = new();
         private int m_bystandersCount;
 
 
@@ -43,6 +45,12 @@ namespace B1TJam2025
         {
             GameManager.OnGameStart -= OnGameStart;
             Bystander.OnBystanderKilled -= OnIndividualBystanderKilled;
+        }
+
+
+        private void Awake()
+        {
+            s_instance = this;
         }
 
 
@@ -84,6 +92,8 @@ namespace B1TJam2025
                 };
                 bystander.transform.localScale = Vector3.one;
 
+                m_allBystanders.Add(bystander);
+
                 bystander.Initialize(m_list);
             }
         }
@@ -93,6 +103,21 @@ namespace B1TJam2025
         {
             m_bystandersCount--;
             OnBystanderKilled?.Invoke(m_bystandersCount, m_spawnCount);
+        }
+
+
+        public static void ToggleBystanderMovement(bool movementOn)
+        {
+            for (int i = s_instance.m_allBystanders.Count - 1; i >= 0; i--)
+            {
+                if (s_instance.m_allBystanders[i] == null)
+                {
+                    s_instance.m_allBystanders.RemoveAt(i);
+                    continue;
+                }
+
+                s_instance.m_allBystanders[i].ToggleMovement(movementOn);
+            }
         }
     }
 }
