@@ -131,7 +131,7 @@ namespace B1TJam2025
             {
                 yield return new WaitForSeconds(INTERVAL);
                 score -= ESCAPE_REDUCTION;
-                _scoreText.text = score.ToString();
+                _scoreText.text = $"Score: {score}";
             }
 
             yield return new WaitForSeconds(INTERVAL);
